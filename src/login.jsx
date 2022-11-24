@@ -64,12 +64,12 @@ function Login() {
       setCredentials({...credentials,[e.target.name]:e.target.value})
     }
     function verifypassword(){
-      console.log(credentials.email+ "    "+ credentials.password);
-
+      
       axios.post(`${url}/verifypassword`,  {"email": credentials.email, "password": credentials.password})
       .then((res)=>{
         if(res.data.success){
-          sessionStorage.setItem('loggedInUserID', res.data.u_id);
+          const u_id = res.data.u_id
+          sessionStorage.setItem("loggedInUserID", u_id);
           history.push("/signup");         
         }
         else{
