@@ -2,6 +2,10 @@
 import { Link, Redirect } from 'react-router-dom';
 import "./Assets/CSS/login.scss";
 import {motion} from 'framer-motion';
+import { useState, useEffect, React } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from "axios";
+const url = process.env.url || 'http://localhost:5000';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -49,7 +53,30 @@ const header = {
   }
 };
 
-function login() {
+function Login() {
+
+    const [credentials, setCredentials] = useState({email:"",password:""});
+    const [err, setErr] = useState("");
+
+    let history = useHistory();
+
+    const onChange = (e)=>{
+      setCredentials({...credentials,[e.target.name]:e.target.value})
+    }
+    function verifypassword(){
+      console.log(credentials.email+ "    "+ credentials.password);
+
+      axios.post(`${url}/verifypassword`,  {"email": credentials.email, "password": credentials.password})
+      .then((res)=>{
+        if(res.data.success){
+          sessionStorage.setItem('loggedInUserID', res.data.u_id);
+          history.push("/signup");         
+        }
+        else{
+            setErr(res.data.message);
+        }
+      }, (err)=>{console.log(err)})
+    }
     return (
     
     <motion.div initial='initial' animate='animate'>
@@ -65,10 +92,11 @@ function login() {
       </motion.div>
       <div className='right_content_wrapper1'>
         <motion.h2> <motion.span variants={fadeInUp}>Login</motion.span></motion.h2>
-        <form method='post' action="" className='loginf'>
-        <motion.input type='email' name='email' placeholder='Enter your Email' variants={fadeInUp} /> <br />
-        <motion.input type='password' name='password' placeholder='Enter your password' variants={fadeInUp}/> <br />
-        <motion.button type= 'sumbit' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Login</motion.button>
+        <form action="" className='loginf'>
+        <motion.input type='email' name='email' placeholder='Enter your Email' onChange={onChange} variants={fadeInUp} /> <br />
+        <motion.input type='password' name='password' placeholder='Enter your password' onChange={onChange} variants={fadeInUp}/> <br />
+        <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {verifypassword} >Login</motion.button>
+        <p>{err} </p>
         </form>
       </div>
     </motion.div>
@@ -76,4 +104,4 @@ function login() {
         );
       }
       
-      export default login;
+      export default Login;
