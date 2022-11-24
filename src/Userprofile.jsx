@@ -1,5 +1,5 @@
 import { Link, Redirect } from 'react-router-dom';
-import "./Assets/CSS/petdetails.scss";
+import "./Assets/CSS/Userprofile.scss";
 import {motion} from 'framer-motion';
 import Nav from './Nav';
 
@@ -43,24 +43,15 @@ function Userprofile() {
                     <motion.img src={process.env.PUBLIC_URL + '/images/home.png'} alt='background' initial={{x:0, opacity:0}} animate={{x:100,
                         opacity:1}} transition={{duration:0.5,delay:.8}} />
                 </motion.div>
-                <div className='right_content_wrapper3'>
-                <div className='Petd'>
-                    <motion.h2 variants={fadeInUp}> Pet Details</motion.h2>
-                    <div className='flex'>
-                        <div className='divl'>
+                <div className='right_content_wrapper4'>
+                <div className='Userd'>
+                    <motion.h2 variants={fadeInUp}>User Details</motion.h2>         
                                 <ul>
-                                <motion.li variants={fadeInUp}><span>Name: </span><br />pname</motion.li>
-                                <motion.li variants={fadeInUp}><span>Email: </span><br />pname</motion.li>    
+                                    <motion.li variants={fadeInUp}><span>Name: </span><br />pname</motion.li>
+                                    <motion.li variants={fadeInUp}><span>Email: </span><br />pname</motion.li>    
+                                    <motion.li variants={fadeInUp}><span>Phone No: </span><br />pname</motion.li>
                                 </ul>
-                        </div>
-                            
-                            <div className='divR'>
-                            <ul>
-                                <motion.li variants={fadeInUp}><span>Phone No: </span><br />pname</motion.li>
-                                </ul>
-                                </div>
-                    </div>
-                    <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Contact Owner</motion.button>
+                    <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Edit Details</motion.button>
                     </div>
                 </div>
             
