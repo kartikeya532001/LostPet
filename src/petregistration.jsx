@@ -2,6 +2,7 @@
 import { Link, Redirect } from 'react-router-dom';
 import "./Assets/CSS/petregis.scss";
 import {motion} from 'framer-motion';
+import Nav from './Nav';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -38,7 +39,7 @@ function petregistration() {
     return (
     
     <motion.div initial='initial' animate='animate'>
-     
+        <Nav />
       <motion.div className='content_wrapper2' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=
       {{duration:0.3,ease:easeing}}>
       
