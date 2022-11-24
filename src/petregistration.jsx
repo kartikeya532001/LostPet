@@ -35,7 +35,7 @@ const fadeInUp = {
 };
 
 
-function petregistration() {
+function Petregistration() {
     return (
     
     <motion.div initial='initial' animate='animate'>
@@ -65,4 +65,4 @@ function petregistration() {
         );
       }
       
-      export default petregistration;
+      export default Petregistration;

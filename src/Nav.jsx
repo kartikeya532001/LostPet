@@ -40,22 +40,22 @@ const header = {
 
 function Nav() {
 
-  const [name, setName] = useState("");
-  const u_id = 2;
-  useEffect(()=>{
-    axios.get(`${url}/getusers/${u_id}`).then((res) => {
-      if(res.data.success){
-        const user = res.data.rows[0];
-        setName(user.name);  
-    }
-    else{
-        const msg = res.data.message;
-        console.log(msg);
-    }
-}
-)
+//   const [name, setName] = useState("");
+//   const u_id = 2;
+//   useEffect(()=>{
+//     axios.get(`${url}/getusers/${u_id}`).then((res) => {
+//       if(res.data.success){
+//         const user = res.data.rows[0];
+//         setName(user.name);  
+//     }
+//     else{
+//         const msg = res.data.message;
+//         console.log(msg);
+//     }
+// }
+// )
       
-  }, []);
+//   }, []);
   
   
   return (
@@ -63,14 +63,16 @@ function Nav() {
     <motion.header variants={stagger}>
     <motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div>
     <motion.div className='menu_container'>
-    <span>
-      {name}
-    </span>
-      <span className='menu'>
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
+    <motion.span variants={header} style={{width:'85px'}}>
+      Profile
+    </motion.span>
+    <motion.span variants={header} style={{width:'65px'}}>
+      Pets
+    </motion.span>
+    <motion.span variants={header}>
+      Logout
+    </motion.span>
+      
     </motion.div>
   </motion.header>
   </motion.div>
