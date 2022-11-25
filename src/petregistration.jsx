@@ -3,6 +3,10 @@ import { Link, Redirect } from 'react-router-dom';
 import "./Assets/CSS/petregis.scss";
 import {motion} from 'framer-motion';
 import Nav from './Nav';
+import { useState, useEffect, React } from 'react';
+import axios from "axios";
+
+const url = process.env.url || 'http://localhost:5000';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -36,6 +40,8 @@ const fadeInUp = {
 
 
 function Petregistration() {
+
+
     return (
     
     <motion.div initial='initial' animate='animate'>
