@@ -2,6 +2,10 @@ import { Link, Redirect } from 'react-router-dom';
 import "./Assets/CSS/Userprofile.scss";
 import {motion} from 'framer-motion';
 import Nav from './Nav';
+import { useState, useEffect, React } from 'react';
+import axios from "axios";
+
+const url = process.env.url || 'http://localhost:5000';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -33,6 +37,26 @@ const fadeInUp = {
   }
 };
 function Userprofile() {
+
+  const [pname,,email,phno, setDatail] = useState("");
+  const u_id = 2;
+  useEffect(()=>{
+  axios.get(`${url}"/getusers/${u_id}`).then((res) => {
+    if(res.data.success){
+      const user = res.data.rows[0];
+      setDatail(user.pname);
+      setDatail(user.email);    
+      setDatail(user.phno);  
+
+  }
+  else{
+      const msg = res.data.message;
+      console.log(msg);
+  }
+}
+)
+    
+}, []);
     return (
       <motion.div initial='initial' animate='animate'>
             <Nav />
@@ -47,9 +71,9 @@ function Userprofile() {
                 <div className='Userd'>
                     <motion.h2 variants={fadeInUp}>User Details</motion.h2>         
                                 <ul>
-                                    <motion.li variants={fadeInUp}><span>Name: </span><br />pname</motion.li>
-                                    <motion.li variants={fadeInUp}><span>Email: </span><br />pname</motion.li>    
-                                    <motion.li variants={fadeInUp}><span>Phone No: </span><br />pname</motion.li>
+                                    <motion.li variants={fadeInUp}><span>Name: </span><br />{pname}</motion.li>
+                                    <motion.li variants={fadeInUp}><span>Email: </span><br />{email}</motion.li>    
+                                    <motion.li variants={fadeInUp}><span>Phone No: </span><br />{phno}</motion.li>
                                 </ul>
                     <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Edit Details</motion.button>
                     </div>
