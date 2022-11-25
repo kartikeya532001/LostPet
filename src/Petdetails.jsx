@@ -41,7 +41,7 @@ function Petdetails() {
   const [pname,type,oname,breed,color,indentifications, setDatails] = useState("");
   const p_id = 2;
   useEffect(()=>{
-  axios.get(`${url}/getusers/${p_id}`).then((res) => {
+  axios.get(`${url}"/getpets/${p_id}`).then((res) => {
     if(res.data.success){
       const user = res.data.rows[0];
       setDatails(user.pname);
