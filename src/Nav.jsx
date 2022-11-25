@@ -63,9 +63,11 @@ function Nav() {
     <motion.header variants={stagger}>
     <motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div>
     <motion.div className='menu_container'>
+    <Link to='/uprofile' style={{color:'#000000'}}>
     <motion.span variants={header} style={{width:'85px'}}>
       Profile
     </motion.span>
+    </Link>
     <motion.span variants={header} style={{width:'65px'}}>
       Pets
     </motion.span>

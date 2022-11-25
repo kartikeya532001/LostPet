@@ -15,12 +15,14 @@ function App() {
     <>
     
     <ScrollToTop />
-   <UserD />
+   
       <Switch>
-      {/* <Route exact path="/" component={Home} />
+      <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} /> 
       <Route exact path="/signup" component={Signup} /> 
-      */}
+      <Route exact path="/petd" component={Petd} /> 
+      <Route exact path="/uprofile" component={UserD} /> 
+     
       </Switch>
     <Footer />
     </>

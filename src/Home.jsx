@@ -1,4 +1,3 @@
-
 import { Link, Redirect } from 'react-router-dom';
 import "./Assets/CSS/Home.scss";
 import {motion} from 'framer-motion';
@@ -173,15 +172,15 @@ function Home() {
               Bhai Bana hua project liya hota toh mast report banani <br />thi bs lekin hum pro hai..<br />
             </motion.p>
             <motion.div className='btn_group' variants={stagger}>
-              <motion.div className='btn btn_primary' variants={btnGroup} whileHover={{scale:1.05}} whileTap={{scale:0.95}}> Register
+              <motion.div className='btn btn_primary' variants={btnGroup} whileHover={{scale:1.05}} whileTap={{scale:0.95}}> <Link to ='/signup' style={{color:'white'}}>Register</Link>
               </motion.div>
-              <motion.div className='btn btn_secondary' variants={btnGroup} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Login</motion.div>
+             <motion.div className='btn btn_secondary' variants={btnGroup} whileHover={{scale:1.05}} whileTap={{scale:0.95}}><Link to ='/login' style={{color:'black'}}>Login </Link></motion.div> 
             </motion.div> 
             <motion.div className='review_container' variants={stagger}>
               <motion.p className='total_review' variants={star}> Enter Pet Id to be searched</motion.p>
               <form method='post' action='' className='forms'>
                 <motion.input type='String' name='Pet_ID' placeholder= 'Enter Pet ID'  variants={star} /> <br /> 
-                <motion.button type= 'sumbit' variants={star} whileHover={{scale:1.05}} whileTap={{scale:0.95}}> Search </motion.button>
+                <Link to ='petd'><motion.button type= 'sumbit' variants={star} whileHover={{scale:1.05}} whileTap={{scale:0.95}}> Search </motion.button></Link>
               </form>
             </motion.div>
         </div> 
