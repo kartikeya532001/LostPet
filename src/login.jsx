@@ -59,23 +59,36 @@ function Login() {
     const [err, setErr] = useState("");
 
     let history = useHistory();
-
+    console.log(sessionStorage.getItem("loggedInUserId"))
+    
+    useEffect(() => {
+      const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+      if (loggedInUserId) {
+        history.push("/signup");    
+      }
+    }, []);
+    
     const onChange = (e)=>{
       setCredentials({...credentials,[e.target.name]:e.target.value})
     }
     function verifypassword(){
-      
+      if(credentials.name == '' || credentials.email == '' || credentials.password == '' || credentials.phonenumber == '')
+      {
+        setErr("Empty Fields");
+      }
+      else{
       axios.post(`${url}/verifypassword`,  {"email": credentials.email, "password": credentials.password})
       .then((res)=>{
         if(res.data.success){
           const u_id = res.data.u_id
-          sessionStorage.setItem("loggedInUserID", u_id);
+          sessionStorage.setItem("loggedInUserId", u_id);
           history.push("/signup");         
         }
         else{
             setErr(res.data.message);
         }
       }, (err)=>{console.log(err)})
+    }
     }
     return (
     
