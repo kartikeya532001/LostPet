@@ -64,7 +64,7 @@ function Login() {
     useEffect(() => {
       const loggedInUserId = sessionStorage.getItem("loggedInUserId");
       if (loggedInUserId) {
-        history.push("/home");    
+        history.push("/userhome");    
       }
     }, []);
 
@@ -82,7 +82,7 @@ function Login() {
         if(res.data.success){
           const u_id = res.data.u_id
           sessionStorage.setItem("loggedInUserId", u_id);
-          history.push("/signup");         
+          history.push("/userhome");         
         }
         else{
             setErr(res.data.message);

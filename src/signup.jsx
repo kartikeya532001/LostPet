@@ -118,8 +118,8 @@ function Signup() {
     <div className='right_content_wrapper1'>
       <motion.h2> <motion.span variants={fadeInUp}>SignUp</motion.span></motion.h2>
       <form method='post' action="" className='loginf'>
-      <motion.input type='text' name='name' placeholder='Enter your Name' required onChange={onChange} variants={fadeInUp} /> <br />
-      <motion.input type='email' name='email' placeholder='Enter your Email' required onChange={onChange} variants={fadeInUp}/> <br />
+      <motion.input type='text' name='name' placeholder='Enter your Name'  onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.input type='email' name='email' placeholder='Enter your Email'  onChange={onChange} variants={fadeInUp}/> <br />
       <motion.input type='password' name='password' placeholder='Enter your password' required onChange={onChange} variants={fadeInUp}/> <br />
       <motion.input type='text' name='phonenumber' placeholder='Enter your PhoneNo' onChange={onChange} variants={fadeInUp}/> <br />
       <p>{Err} </p>
