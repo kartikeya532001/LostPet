@@ -36,25 +36,41 @@ const fadeInUp = {
     }
   }
 };
-function Petdetails() {
+function PetDetails() {
 
-  const [pname,type,oname,breed,color,indentifications, setDatails] = useState("");
-  const p_id = 2;
+  //the p_id should be sent here via props or have to included in the urls like /petdetails/${p_id}
+  const p_id = "6f5ggs";
+
+
+  const [petname, setPetname] = useState("");
+  const [o_id, setO_id] = useState()
+  const [ownername, setOwnername] = useState("");
+  const [breed, setBreed] = useState("");
+  const [color, setColour] = useState("");
+  const [gender, setGender] = useState("");
+  const [category, setCategory] = useState("");
+  const [marks, setMarks] = useState("");
+  const [license, setLicense] = useState("");
+  const [Err, setErr] = useState("");
+
   useEffect(()=>{
-  axios.get(`${url}"/getpets/${p_id}`).then((res) => {
+    
+  axios.get(`${url}/getpets/${p_id}`).then((res) => {
     if(res.data.success){
-      const user = res.data.rows[0];
-      setDatails(user.pname);
-      setDatails(user.type);    
-      setDatails(user.oname);  
-      setDatails(user.breed);
-      setDatails(user.color);
-      setDatails(user.indentifications);
-
+      const pet = res.data.rows[0]
+      setPetname(pet.name);
+      setO_id(pet.o_id);
+      setOwnername(pet.ownername);
+      setBreed(pet.breed);
+      setColour(pet.colour);
+      setGender(pet.gender);
+      setCategory(pet.category);
+      setMarks(pet.marks);
+      setLicense(pet.license);
   }
   else{
       const msg = res.data.message;
-      console.log(msg);
+      setErr(msg);
   }
 }
 )
@@ -77,9 +93,9 @@ function Petdetails() {
                         <div className='divl'>
                                 <ul>
                                 <motion.li variants={fadeInUp}><span>Pet ID: </span><br />{p_id}</motion.li>
-                                <motion.li variants={fadeInUp}><span>Pet Name: </span><br />{pname}</motion.li>
-                                <motion.li variants={fadeInUp}><span>Pet Category: </span><br />{type}</motion.li>
-                                <motion.li variants={fadeInUp}><span>Indentifications: </span><br />{indentifications}</motion.li>
+                                <motion.li variants={fadeInUp}><span>Pet Name: </span><br />{petname}</motion.li>
+                                <motion.li variants={fadeInUp}><span>Pet Category: </span><br />{category}</motion.li>
+                                <motion.li variants={fadeInUp}><span>Identifications: </span><br />{marks}</motion.li>
                                 
                                 </ul>
                         </div>
@@ -87,8 +103,9 @@ function Petdetails() {
                             <div className='divR'>
                             <ul>
                                 <motion.li variants={fadeInUp}><span>Pet Breed: </span><br />{breed}</motion.li>
+                                <motion.li variants={fadeInUp}><span>Pet Gender: </span><br />{gender}</motion.li>
                                 <motion.li variants={fadeInUp}><span>Pet Colour: </span><br />{color}</motion.li>
-                                <motion.li variants={fadeInUp}><span>Pet Owner Name: </span><br />{oname}</motion.li>
+                                <motion.li variants={fadeInUp}><span>Pet Owner Name: </span><br />{ownername}</motion.li>
                                 </ul>
                                 </div>
                     </div>
@@ -102,4 +119,4 @@ function Petdetails() {
     );
   }
   
-  export default Petdetails;
+  export default PetDetails;

@@ -6,8 +6,8 @@ import Signup from "./signup";
 import Pet from "./Petregistration"
 import Footer from "./Footer";
 import ScrollToTop from './ScrollToTop';
-import Petd from "./Petdetails";
-import UserD from "./Userprofile";
+import PetDetails from "./Petdetails";
+import UserDetails from "./Userprofile";
 
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} /> 
       <Route exact path="/signup" component={Signup} /> 
-      <Route exact path="/petd" component={Petd} /> 
-      <Route exact path="/uprofile" component={UserD} /> 
+      <Route exact path="/petdetails" component={PetDetails} /> 
+      <Route exact path="/userprofile" component={UserDetails} /> 
      
       </Switch>
     <Footer />
