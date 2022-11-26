@@ -5,6 +5,7 @@ import {motion} from 'framer-motion';
 import Nav from './Nav';
 import { useState, useEffect, React } from 'react';
 import { useHistory } from 'react-router-dom';
+import ShortUniqueId from 'short-unique-id';
 import axios from "axios";
 const url = process.env.url || 'http://localhost:5000';
 
@@ -49,10 +50,33 @@ function Petregistration() {
   const onChange = (e)=>{
     setCredentials({...credentials,[e.target.name]:e.target.value})
   }
+  useEffect(() => {
+    const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+    if (loggedInUserId) {
+          //do nothing
+    }
+    else{
+      history.push("/login");
+    }
+  }, []);
 
-  function generate_p_id(creds){
+  function generate_p_id(){
     //generate p_id according to the credentials of the pet
-
+    const suid = new ShortUniqueId({ length: 8 });
+    const p_id = suid();
+    console.log(p_id)
+    axios.post(`${url}/pidexists`, {"p_id": p_id})
+    .then((res)=>{
+      if(res.data.success){
+        console.log("Existing p_id detected")
+        return generate_p_id()
+      }
+      else{
+        console.log("retuning")
+        return p_id;
+      }
+    }, (err)=>{console.log(err)})
+    
   }
   function addPet(){
     
@@ -61,10 +85,15 @@ function Petregistration() {
       setErr("Empty fields");
     }
     else{
-      // const p_id = generate_p_id(credentials)
-      // const o_id = sessionStorage.getItem("loggedInUserId")
-      const p_id = 1
-      const o_id = 7
+
+      
+      //const p_id = generate_p_id()
+      const suid = new ShortUniqueId({ length: 8 });
+      const p_id = suid();
+      console.log("> woof woof, here's my id: " + p_id)
+      const o_id = sessionStorage.getItem("loggedInUserId")
+      
+      
       axios.post(`${url}/addpet`, {"p_id": p_id,"o_id":o_id, "name":credentials.name, "breed":credentials.breed ,"colour":credentials.colour, "gender":credentials.gender, "category":credentials.category, "marks":credentials.marks, "license":credentials.license })
       .then((res) => {
         console.log("called")
