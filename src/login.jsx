@@ -64,10 +64,10 @@ function Login() {
     useEffect(() => {
       const loggedInUserId = sessionStorage.getItem("loggedInUserId");
       if (loggedInUserId) {
-        history.push("/signup");    
+        history.push("/home");    
       }
     }, []);
-    
+
     const onChange = (e)=>{
       setCredentials({...credentials,[e.target.name]:e.target.value})
     }
