@@ -53,31 +53,14 @@ function Petregistration() {
   useEffect(() => {
     const loggedInUserId = sessionStorage.getItem("loggedInUserId");
     if (loggedInUserId) {
-          //do nothing
+      //do nothing
     }
     else{
       history.push("/login");
     }
   }, []);
 
-  function generate_p_id(){
-    //generate p_id according to the credentials of the pet
-    const suid = new ShortUniqueId({ length: 8 });
-    const p_id = suid();
-    console.log(p_id)
-    axios.post(`${url}/pidexists`, {"p_id": p_id})
-    .then((res)=>{
-      if(res.data.success){
-        console.log("Existing p_id detected")
-        return generate_p_id()
-      }
-      else{
-        console.log("retuning")
-        return p_id;
-      }
-    }, (err)=>{console.log(err)})
-    
-  }
+  
   function addPet(){
     
     if(credentials.name == '' || credentials.breed == '' || credentials.colour == '' || credentials.gender == '' || credentials.category == '' || credentials.marks == '' || credentials.license == '')
@@ -85,32 +68,32 @@ function Petregistration() {
       setErr("Empty fields");
     }
     else{
-
-      
-      //const p_id = generate_p_id()
-      const suid = new ShortUniqueId({ length: 8 });
-      const p_id = suid();
-      console.log("> woof woof, here's my id: " + p_id)
       const o_id = sessionStorage.getItem("loggedInUserId")
-      
-      
-      axios.post(`${url}/addpet`, {"p_id": p_id,"o_id":o_id, "name":credentials.name, "breed":credentials.breed ,"colour":credentials.colour, "gender":credentials.gender, "category":credentials.category, "marks":credentials.marks, "license":credentials.license })
-      .then((res) => {
-        console.log("called")
+      const suid = new ShortUniqueId({ length: 8 });
+      var p_id = suid();
+      console.log(p_id)
+      axios.post(`${url}/pidexists`, {"p_id": p_id})
+      .then((res)=>{
         if(!res.data.success){
-          setErr(res.data.message);
-      }else{
-        console.log(res.data.message)
-        history.push("/userhome"); 
-      }
-
-
-      })
+          console.log("Existing p_id detected")
+          p_id = suid();
+        }
+        console.log("returning")
+        axios.post(`${url}/addpet`, {"p_id": p_id,"o_id":o_id, "name":credentials.name, "breed":credentials.breed ,"colour":credentials.colour, "gender":credentials.gender, "category":credentials.category, "marks":credentials.marks, "license":credentials.license })
+        .then((res) => {
+          console.log("called")
+          if(!res.data.success){
+            setErr(res.data.message);
+        }else{
+          console.log(res.data.message)
+          history.push("/userhome"); 
+        }
+        })
+      }, (err)=>{console.log(err)})
     }
   }
 
   return (
-  
   <motion.div initial='initial' animate='animate'>
       <Nav />
     <motion.div className='content_wrapper2' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=

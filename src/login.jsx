@@ -55,66 +55,66 @@ const header = {
 
 function Login() {
 
-    const [credentials, setCredentials] = useState({email:"",password:""});
-    const [err, setErr] = useState("");
+  const [credentials, setCredentials] = useState({email:"",password:""});
+  const [err, setErr] = useState("");
 
-    let history = useHistory();
-    console.log(sessionStorage.getItem("loggedInUserId"))
-    
-    useEffect(() => {
-      const loggedInUserId = sessionStorage.getItem("loggedInUserId");
-      if (loggedInUserId) {
-        history.push("/userhome");    
-      }
-    }, []);
-
-    const onChange = (e)=>{
-      setCredentials({...credentials,[e.target.name]:e.target.value})
+  let history = useHistory();
+  console.log(sessionStorage.getItem("loggedInUserId"))
+  
+  useEffect(() => {
+    const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+    if (loggedInUserId) {
+      history.push("/userhome");    
     }
-    function verifypassword(){
-      if(credentials.name == '' || credentials.email == '' || credentials.password == '' || credentials.phonenumber == '')
-      {
-        setErr("Empty Fields");
+  }, []);
+
+  const onChange = (e)=>{
+    setCredentials({...credentials,[e.target.name]:e.target.value})
+  }
+  function verifypassword(){
+    if(credentials.name == '' || credentials.email == '' || credentials.password == '' || credentials.phonenumber == '')
+    {
+      setErr("Empty Fields");
+    }
+    else{
+    axios.post(`${url}/verifypassword`,  {"email": credentials.email, "password": credentials.password})
+    .then((res)=>{
+      if(res.data.success){
+        const u_id = res.data.u_id
+        sessionStorage.setItem("loggedInUserId", u_id);
+        history.push("/userhome");         
       }
       else{
-      axios.post(`${url}/verifypassword`,  {"email": credentials.email, "password": credentials.password})
-      .then((res)=>{
-        if(res.data.success){
-          const u_id = res.data.u_id
-          sessionStorage.setItem("loggedInUserId", u_id);
-          history.push("/userhome");         
-        }
-        else{
-            setErr(res.data.message);
-        }
-      }, (err)=>{console.log(err)})
-    }
-    }
-    return (
-    
-    <motion.div initial='initial' animate='animate'>
-        <motion.header variants={stagger}>
-        <motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div>
-      </motion.header>
-      <motion.div className='content_wrapper1' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=
-      {{duration:0.3,ease:easeing}}>
-      
-      <motion.div className='left_content_wrapper1'>
-      <motion.img src={process.env.PUBLIC_URL + '/images/home.png'} alt='background' initial={{x:0, opacity:0}} animate={{x:100,
-          opacity:1}} transition={{duration:0.5,delay:.8}} />
-      </motion.div>
-      <div className='right_content_wrapper1'>
-        <motion.h2> <motion.span variants={fadeInUp}>Login</motion.span></motion.h2>
-        <form action="" className='loginf'>
-        <motion.input type='email' name='email' placeholder='Enter your Email' onChange={onChange} variants={fadeInUp} /> <br />
-        <motion.input type='password' name='password' placeholder='Enter your password' onChange={onChange} variants={fadeInUp}/> <br />
-        <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {verifypassword} >Login</motion.button>
-        <p>{err} </p>
-        </form>
-      </div>
-    </motion.div>
-    </motion.div>
-        );
+          setErr(res.data.message);
       }
-      
-      export default Login;
+    }, (err)=>{console.log(err)})
+    }
+  }
+  return (
+  
+    <motion.div initial='initial' animate='animate'>
+      <motion.header variants={stagger}>
+      <motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div>
+    </motion.header>
+    <motion.div className='content_wrapper1' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=
+    {{duration:0.3,ease:easeing}}>
+    
+    <motion.div className='left_content_wrapper1'>
+    <motion.img src={process.env.PUBLIC_URL + '/images/home.png'} alt='background' initial={{x:0, opacity:0}} animate={{x:100,
+        opacity:1}} transition={{duration:0.5,delay:.8}} />
+    </motion.div>
+    <div className='right_content_wrapper1'>
+      <motion.h2> <motion.span variants={fadeInUp}>Login</motion.span></motion.h2>
+      <form action="" className='loginf'>
+      <motion.input type='email' name='email' placeholder='Enter your Email' onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.input type='password' name='password' placeholder='Enter your password' onChange={onChange} variants={fadeInUp}/> <br />
+      <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {verifypassword} >Login</motion.button>
+      <p>{err} </p>
+      </form>
+    </div>
+  </motion.div>
+  </motion.div>
+      );
+}
+    
+export default Login;
