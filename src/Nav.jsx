@@ -84,7 +84,7 @@ function Nav() {
   return (
     <motion.div initial='initial' animate='animate'>
     <motion.header variants={stagger}>
-    <motion.div className='logo_wrapper' variants={header} onClick = {()=>{history.push('/')}}>Lost<span>Pets</span></motion.div>
+    <motion.div className='logo_wrapper' variants={header} onClick = {()=>{history.push('/')}} style={{cursor: 'pointer'}}>Lost<span>Pets</span></motion.div>
     <motion.div className='menu_container'>
     <Link to='/userprofile' style={{color:'#000000',textDecoration: 'none'}}>
     <motion.span variants={header} style={{width:'85px'}}>
@@ -94,7 +94,7 @@ function Nav() {
     <motion.span variants={header} style={{width:'65px'}}>
       Pets
     </motion.span>
-    <motion.span variants={header} onClick = {loginLogoutClick}>
+    <motion.span variants={header} onClick = {loginLogoutClick} style={{cursor: 'pointer'}}>
       {loginLogout}
     </motion.span>
       

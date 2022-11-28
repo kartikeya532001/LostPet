@@ -140,39 +140,48 @@ function Home() {
         <div className='left_content_wrapper'>
             <motion.h2>
                <motion.span variants={firstName} initial='initial' animate='animate' className='first'>
-               <motion.span variants={letter}>D</motion.span>
-               <motion.span variants={letter}>e</motion.span>
-               <motion.span variants={letter}>s</motion.span>
-               <motion.span variants={letter}>i</motion.span>
-               <motion.span variants={letter}>g</motion.span>
-               <motion.span variants={letter}>n</motion.span>
-               <motion.span variants={letter} className='second'>f</motion.span>
+               <motion.span variants={letter}>B</motion.span>
+               <motion.span variants={letter}>A</motion.span>
+               <motion.span variants={letter}>R</motion.span>
+               <motion.span variants={letter}>K</motion.span>
+               <motion.span variants={letter}>E</motion.span>
+               <motion.span variants={letter}>X</motion.span>
+               <motion.span variants={letter}>X</motion.span>
+               {/* <motion.span variants={letter} className='second'>f</motion.span>
                <motion.span variants={letter}>o</motion.span>
                <motion.span variants={letter}>c</motion.span>
                <motion.span variants={letter}>u</motion.span>
                <motion.span variants={letter}>s</motion.span>
                <motion.span variants={letter}>e</motion.span>
-               <motion.span variants={letter}>d</motion.span>
+               <motion.span variants={letter}>d</motion.span> */}
                </motion.span>
                <motion.span variants={lastName} initial='initial' animate='animate' className='last'>
-               <motion.span variants={letter}>S</motion.span>
-               <motion.span variants={letter}>t</motion.span>
-               <motion.span variants={letter}>a</motion.span>
-               <motion.span variants={letter}>r </motion.span>
-               <motion.span variants={letter}>t</motion.span>
+               <motion.span variants={letter}>P</motion.span>
                <motion.span variants={letter}>u</motion.span>
-               <motion.span variants={letter}>p,</motion.span>
-               <motion.span variants={letter} className='second'>f</motion.span>
+               <motion.span variants={letter}>p</motion.span>
+               <motion.span variants={letter} className='second'>F</motion.span>
+               <motion.span variants={letter}>i</motion.span>
+               <motion.span variants={letter}>n</motion.span>
+               <motion.span variants={letter}>d</motion.span>
+               <motion.span variants={letter}>e</motion.span>
+               <motion.span variants={letter}>r</motion.span>
+               <motion.span variants={letter} className='second'>B</motion.span>
+               <motion.span variants={letter}>o</motion.span>
+               <motion.span variants={letter}>w</motion.span>
+               <motion.span variants={letter} className='second'>F</motion.span>
                <motion.span variants={letter}>o</motion.span>
                <motion.span variants={letter}>r</motion.span>
-               <motion.span variants={letter} className='second'>s</motion.span>
+               <motion.span variants={letter} className='second'>B</motion.span>
+               <motion.span variants={letter}>o</motion.span>
+               <motion.span variants={letter}>w.</motion.span>
+               {/* <motion.span variants={letter} className='second'>s</motion.span>
                <motion.span variants={letter}>t</motion.span>
                <motion.span variants={letter}>a</motion.span>
                <motion.span variants={letter}>r</motion.span>
                <motion.span variants={letter}>t</motion.span>
                <motion.span variants={letter}>u</motion.span>
                <motion.span variants={letter}>p</motion.span>
-               <motion.span variants={letter}>s.</motion.span>
+               <motion.span variants={letter}>s.</motion.span> */}
 
                </motion.span>
             </motion.h2>

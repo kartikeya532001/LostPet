@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Login from "./login";
 import Signup from "./signup";
-import PetRegistration from "./Petregistration"
+import PetRegistration from "./petregistration"
 import Footer from "./Footer";
 import ScrollToTop from './ScrollToTop';
 import PetDetails from "./Petdetails";
