@@ -1,4 +1,4 @@
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import "./Assets/CSS/Nav.scss";
 import {motion} from 'framer-motion';
 import {FaBehance, FaDribble} from 'react-icons/fa';
@@ -56,12 +56,35 @@ function Nav() {
 // )
       
 //   }, []);
+  const history = useHistory()
+  const [loginLogout, setLoginLogout] = useState("")
   
+  useEffect(() => {
+    const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+    if (loggedInUserId) {
+      setLoginLogout("Logout") 
+    }
+    else{
+      setLoginLogout("Login")
+    }
+  }, []);
+
+  function loginLogoutClick(){
+    const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+    if (loggedInUserId) {
+      sessionStorage.clear();
+      history.push('/')
+    }
+    else{
+      history.push('/login')
+    }
+  }
+
   
   return (
     <motion.div initial='initial' animate='animate'>
     <motion.header variants={stagger}>
-    <motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div>
+    <motion.div className='logo_wrapper' variants={header} onClick = {()=>{history.push('/')}}>Lost<span>Pets</span></motion.div>
     <motion.div className='menu_container'>
     <Link to='/userprofile' style={{color:'#000000',textDecoration: 'none'}}>
     <motion.span variants={header} style={{width:'85px'}}>
@@ -71,8 +94,8 @@ function Nav() {
     <motion.span variants={header} style={{width:'65px'}}>
       Pets
     </motion.span>
-    <motion.span variants={header}>
-      Logout
+    <motion.span variants={header} onClick = {loginLogoutClick}>
+      {loginLogout}
     </motion.span>
       
     </motion.div>

@@ -1,6 +1,7 @@
 import { Link, Redirect } from 'react-router-dom';
 import "./Assets/CSS/Home.scss";
 import {motion} from 'framer-motion';
+import { useState, React } from 'react';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -121,6 +122,13 @@ const header = {
 
 
 function Home() {
+  
+  const [text, setText] = useState('');
+
+  const handleChange = event => {
+    setText(event.target.value);
+  };
+
   return (
     <motion.div initial='initial' animate='animate'>
       <motion.header variants={stagger}>
@@ -179,8 +187,8 @@ function Home() {
             <motion.div className='review_container' variants={stagger}>
               <motion.p className='total_review' variants={star}> Enter Pet Id to be searched</motion.p>
               <form method='post' action='' className='forms'>
-                <motion.input type='String' name='Pet_ID' placeholder= 'Enter Pet ID'  variants={star} /> <br /> 
-                <Link to ='petd'><motion.button type= 'sumbit' variants={star} whileHover={{scale:1.05}} whileTap={{scale:0.95}}> Search </motion.button></Link>
+                <motion.input type='String' name='Pet_ID' placeholder= 'Enter Pet ID'  variants={star} onChange = {handleChange} /> <br /> 
+                <Link to ={`/petdetails/${text}`}><motion.button type= 'button' variants={star} whileHover={{scale:1.05}} whileTap={{scale:0.95}} > Search </motion.button></Link>
               </form>
             </motion.div>
         </div> 

@@ -1,4 +1,4 @@
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation, useParams } from 'react-router-dom';
 import "./Assets/CSS/petdetails.scss";
 import {motion} from 'framer-motion';
 import Nav from './Nav';
@@ -39,11 +39,11 @@ const fadeInUp = {
 function PetDetails() {
 
   //the p_id should be sent here via props or have to included in the urls like /petdetails/${p_id}
-  const p_id = "6f5ggs";
 
+  //const p_id = "6f5ggs"
 
   const [petname, setPetname] = useState("");
-  const [o_id, setO_id] = useState()
+  const [o_id, setO_id] = useState();
   const [ownername, setOwnername] = useState("");
   const [breed, setBreed] = useState("");
   const [color, setColour] = useState("");
@@ -52,11 +52,14 @@ function PetDetails() {
   const [marks, setMarks] = useState("");
   const [license, setLicense] = useState("");
   const [Err, setErr] = useState("");
+  
+  const params = useParams();
+  const p_id = params.p_id
 
   useEffect(()=>{
-    
   axios.get(`${url}/getpets/${p_id}`).then((res) => {
     if(res.data.success){
+      console.log(res.data)
       const pet = res.data.rows[0]
       setPetname(pet.name);
       setO_id(pet.o_id);
@@ -74,8 +77,8 @@ function PetDetails() {
   }
 }
 )
-    
 }, []);
+
     return (
       <motion.div initial='initial' animate='animate'>
             <Nav />
@@ -96,7 +99,6 @@ function PetDetails() {
                                 <motion.li variants={fadeInUp}><span>Pet Name: </span><br />{petname}</motion.li>
                                 <motion.li variants={fadeInUp}><span>Pet Category: </span><br />{category}</motion.li>
                                 <motion.li variants={fadeInUp}><span>Identifications: </span><br />{marks}</motion.li>
-                                
                                 </ul>
                         </div>
                             
@@ -107,7 +109,7 @@ function PetDetails() {
                                 <motion.li variants={fadeInUp}><span>Pet Colour: </span><br />{color}</motion.li>
                                 <motion.li variants={fadeInUp}><span>Pet Owner Name: </span><br />{ownername}</motion.li>
                                 </ul>
-                                </div>
+                            </div>
                     </div>
                     <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Contact Owner</motion.button>
                     </div>
