@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 import Dat from "./PetListD";
 import React from "react";
 import Petsd from "./Petsd";
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from "axios";
+const url = process.env.url || 'http://localhost:5000';
 
 
 let easeing = [0.6,-0.05,0.01,0.99];
@@ -40,6 +44,36 @@ const fadeInUp = {
 
 
 function DisplayPets() {
+
+  const history = useHistory();
+  const o_id = sessionStorage.getItem("loggedInUserId");
+  const [pets, setPets] = useState([])
+  const [Err, setErr] = useState("")
+  const [num, setNum] = useState(5)
+  useEffect(() => {
+    axios.get(`${url}/getownerpets/${o_id}`)
+    .then((res)=>{
+      console.log("here")
+      if(res.data.success){
+        const petsArray = res.data.rows
+        setPets(petsArray)
+        console.log(petsArray)
+        console.log(pets)
+        setNum(1)
+      }
+      else{
+        setNum(1)
+        console.log("else")
+        setErr("0 registered pets found")
+      }
+    }, (err)=>{console.log(err)})
+
+
+  }, [num]);
+
+
+
+
   return (
     <motion.div initial='initial' animate='animate'>
     <Nav />
@@ -62,12 +96,11 @@ function DisplayPets() {
                       <th>View Details</th>
                     </tr>
                     </motion.table>
-    {Dat.map((dat) => (
+    {pets.map((pets) => (
       <Petsd
-          Pet_ID={dat.Pet_ID}
-          name={dat.name}
-          link={dat.link}
-         
+          Pet_ID={pets.p_id}
+          name={pets.name}
+          link= {`/petdetails/${pets.p_id}`}
       />
     ))}
     </div>
