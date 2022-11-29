@@ -10,24 +10,28 @@ import PetDetails from "./Petdetails";
 import UserDetails from "./Userprofile";
 import UserHome from "./UserHome";
 import DisplayPets from "./DisplayPets";
+import DisplayPetsN from "./DisplayPetsN";
+import EditPet from "./EditPetDetails";
+import EditUser from "./EditUserDetails";
 
 
 function App() {
   return (
     <>
-  
-    <ScrollToTop />
-   
+    
+    <ScrollToTop /> 
       <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} /> 
-      <Route exact path="/signup" component={Signup} /> 
-      <Route exact path="/petdetails/:p_id" component={PetDetails} /> 
-      <Route exact path="/userprofile" component={UserDetails} />
-      <Route exact path="/petregistration" component={PetRegistration} /> 
-      <Route exact path="/userhome" component={UserHome} />
-      <Route exact path="/displaypets" component={DisplayPets} /> 
-     
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} /> 
+        <Route exact path="/signup" component={Signup} /> 
+        <Route exact path="/petdetails/:p_id" component={PetDetails} /> 
+        <Route exact path="/userprofile" component={UserDetails} />
+        <Route exact path="/petregistration" component={PetRegistration} /> 
+        <Route exact path="/userhome" component={UserHome} />
+        <Route exact path="/displaypets" component={DisplayPets} /> 
+        <Route exact path="/displaypetsn" component={DisplayPetsN} /> 
+        <Route exact path="/editpetdetails" component={EditPet} /> 
+        <Route exact path="/edituserdetails" component={EditUser} /> 
       </Switch>
     <Footer />
     </>

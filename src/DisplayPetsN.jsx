@@ -2,10 +2,6 @@ import "./Assets/CSS/App.css";
 import { Link, Redirect } from 'react-router-dom';
 import Nav from "./Nav";
 import { motion } from "framer-motion";
-import Dat from "./PetListD";
-import React from "react";
-import Petsd from "./Petsd";
-
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -38,8 +34,7 @@ const fadeInUp = {
 };
 
 
-
-function DisplayPets() {
+function DisplayPetsN() {
   return (
     <motion.div initial='initial' animate='animate'>
     <Nav />
@@ -52,30 +47,25 @@ function DisplayPets() {
         </motion.div>
         <div className='right_content_wrapper3'>
             <div className='Petd'>
-                    <motion.h2 variants={fadeInUp} style={{marginLeft:'120px', marginTop:'-160px',marginBottom:'30px'}}>
+                    <motion.h2 variants={fadeInUp} style={{marginLeft:'80px', marginTop:'-40px',marginBottom:'30px'}}>
                         List of Pets
                     </motion.h2>
-                    <motion.table variants={fadeInUp}>
-                    <tr>
-                      <th>Pet ID</th>
-                      <th>Name</th>
-                      <th>View Details</th>
-                    </tr>
-                    </motion.table>
-    {Dat.map((dat) => (
-      <Petsd
-          Pet_ID={dat.Pet_ID}
-          name={dat.name}
-          link={dat.link}
-         
-      />
-    ))}
-    </div>
+                    <motion.p variants={fadeInUp} style={{marginLeft:'-50px',marginBottom:'30px',fontSize:'1.42vw',color:'#000000',fontWeight:'600'}}>
+                        No pets registered on this account.<br />
+                        Click on the button below to register a new pet.
+                    </motion.p>
+                    <Link to ='/petregistration'>
+                        <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} style={{marginLeft:'60px'}}>
+                            Register Pet
+                        </motion.button>
+                    </Link>
+            </div>
         </div>
     
     </motion.div>
 </motion.div>
+ 
   );
 }
 
-export default DisplayPets;
+export default DisplayPetsN;

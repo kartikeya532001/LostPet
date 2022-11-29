@@ -91,9 +91,11 @@ function Nav() {
       Profile
     </motion.span>
     </Link>
+    <Link to='/displaypets' style={{color:'#000000',textDecoration: 'none'}}>
     <motion.span variants={header} style={{width:'65px'}}>
       Pets
     </motion.span>
+    </Link>
     <motion.span variants={header} onClick = {loginLogoutClick} style={{cursor: 'pointer'}}>
       {loginLogout}
     </motion.span>
