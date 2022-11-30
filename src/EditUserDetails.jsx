@@ -59,6 +59,18 @@ function EditUserDetails() {
     {
       setErr("Empty fields");
     }
+
+    else if (phonenumber(credentials.phonenumber) == false || credentials.phonenumber.length != 10){
+      setErr("PhoneNo Invalid");
+    }
+    else if (checkname(credentials.name) == false){
+      setErr("Name Invalid");
+    }
+    
+    else if (checkmail(credentials.email) == false){
+      setErr("Email Invalid");
+    }
+
     else{
       const o_id = sessionStorage.getItem("loggedInUserId")
       const suid = new ShortUniqueId({ length: 8 });
@@ -84,6 +96,31 @@ function EditUserDetails() {
       }, (err)=>{console.log(err)})
     }
   }
+
+  
+  function phonenumber(phoneNo){
+    var regex = /^[0-9]*$/;
+    var isValid = regex.test(phoneNo);
+    var result = true;
+    result = (!isValid) ? false : true;
+    return result;
+  }
+
+ function checkname(name){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(name);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+ }
+
+ function checkmail(name){
+    var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var isValid = regex.test(name);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+ }
 
   return (
   <motion.div initial='initial' animate='animate'>

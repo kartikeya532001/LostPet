@@ -67,6 +67,35 @@ function Petregistration() {
     {
       setErr("Empty fields");
     }
+
+    else if (checkname(credentials.name) == false){
+      setErr("Name Invalid");
+    }
+
+    else if (checkbreed(credentials.breed) == false){
+      setErr("Breed Invalid");
+    }
+
+    else if (checkcolour(credentials.colour) == false){
+      setErr("Colour Invalid");
+    }
+
+    else if (checkgender(credentials.gender) == false){
+      setErr("Gender Invalid");
+    }
+
+    else if (checkcategory(credentials.category) == false){
+      setErr("Category Invalid");
+    }
+
+    else if (checkmarks(credentials.marks) == false){
+      setErr("Marks Invalid");
+    }
+
+    else if (checklicense(credentials.license) == false && credentials.license.length != 15) {
+      setErr("Invalid LicenseNo");
+    }
+
     else{
       const o_id = sessionStorage.getItem("loggedInUserId")
       const suid = new ShortUniqueId({ length: 8 });
@@ -91,6 +120,62 @@ function Petregistration() {
         })
       }, (err)=>{console.log(err)})
     }
+  }
+  
+  function checkname(name){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(name);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
+  function checkbreed(breed){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(breed);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
+  function checkcolour(colour){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(colour);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
+  function checkgender(gender){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(gender);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
+  function checkcategory(category){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(category);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
+  function checkmarks(marks){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(marks);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
+  function checklicense(license){
+    var regex = /^[A-Za-z0-9]*$/;
+    var isValid = regex.test(license);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
   }
 
   return (

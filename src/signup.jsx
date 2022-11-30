@@ -71,6 +71,19 @@ function Signup() {
     {
       setErr("Empty Fields");
     }
+    else if (phonenumber(credentials.phonenumber) == false || credentials.phonenumber.length != 10){
+      setErr("PhoneNo Invalid");
+    }
+    else if (checkname(credentials.name) == false){
+      setErr("Name Invalid");
+    }
+    else if (credentials.password.length < 8){
+      setErr("Small password");
+    }
+    else if (checkmail(credentials.email) == false){
+      setErr("Email Invalid");
+    }
+    
     else{
     axios.post(`${url}/emailexists`,  {"email": credentials.email})
       .then((res)=>{
@@ -103,10 +116,34 @@ function Signup() {
     }
   }
 
+  function phonenumber(phoneNo){
+        var regex = /^[0-9]*$/;
+        var isValid = regex.test(phoneNo);
+        var result = true;
+        result = (!isValid) ? false : true;
+        return result;
+  }
+
+  function checkname(name){
+    var regex = /^[A-Za-z ]*$/;
+    var isValid = regex.test(name);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
+  function checkmail(name){
+    var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var isValid = regex.test(name);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
+
   return (
   <motion.div initial='initial' animate='animate'>
       <motion.header variants={stagger}>
-      <motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div>
+      <Link to ='/' style={{color:'#000000',textDecoration: 'none'}}><motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div></Link>
     </motion.header>
     <motion.div className='content_wrapper1' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=
     {{duration:0.3,ease:easeing}}>

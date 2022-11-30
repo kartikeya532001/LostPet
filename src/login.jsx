@@ -76,6 +76,7 @@ function Login() {
     {
       setErr("Empty Fields");
     }
+  
     else{
     axios.post(`${url}/verifypassword`,  {"email": credentials.email, "password": credentials.password})
     .then((res)=>{
@@ -90,11 +91,13 @@ function Login() {
     }, (err)=>{console.log(err)})
     }
   }
+
+
   return (
   
     <motion.div initial='initial' animate='animate'>
       <motion.header variants={stagger}>
-      <motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div>
+      <Link to ='/' style={{color:'#000000',textDecoration: 'none'}}><motion.div className='logo_wrapper' variants={header}>Lost<span>Pets</span></motion.div></Link>
     </motion.header>
     <motion.div className='content_wrapper1' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=
     {{duration:0.3,ease:easeing}}>
