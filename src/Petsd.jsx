@@ -44,10 +44,16 @@ function Petsd(props) {
                    
                     <tr>
                       <td>{props.Pet_ID}</td>
-                      <td>{props.name}</td>
+                      <td style={{
+                         paddingLeft:'40px', paddingRight:'40px',paddingTop: '20px',paddingBottom:'20px'
+                        }}>{props.name}</td>
                       <td>
                       <Link to = {props.link}>
-                        <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>
+                        <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}
+                        style={{
+                        height:'30px',width:'80px', marginLeft:'10px', marginTop: '0px',fontSize:'15px'
+                        }}
+                        >
                           View Details
                         </motion.button>
                       </Link>

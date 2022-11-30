@@ -1,5 +1,4 @@
 import "./Assets/CSS/App.css";
-import { Link, Redirect } from 'react-router-dom';
 import Nav from "./Nav";
 import { motion } from "framer-motion";
 import React from "react";
@@ -91,7 +90,7 @@ function DisplayPets() {
                     <motion.table variants={fadeInUp}>
                     <tr>
                       <th>Pet ID</th>
-                      <th>Name</th>
+                      <th >Name</th>
                       <th>View Details</th>
                     </tr>
                     </motion.table>
@@ -100,6 +99,7 @@ function DisplayPets() {
           Pet_ID={pets.p_id}
           name={pets.name}
           link= {`/petdetails/${pets.p_id}`}
+          
       />
     ))}
     </div>
