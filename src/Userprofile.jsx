@@ -38,25 +38,34 @@ const fadeInUp = {
 };
 function Userprofile() {
 
-  const [pname,,email,phno, setDatail] = useState("");
-  const u_id = 2;
-  useEffect(()=>{
-  axios.get(`${url}"/getusers/${u_id}`).then((res) => {
-    if(res.data.success){
-      const user = res.data.rows[0];
-      setDatail(user.pname);
-      setDatail(user.email);    
-      setDatail(user.phno);  
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phonenumber, setPhonenumber] = useState(0);
+  const [Err, setErr] = useState("");
+  
+  
+  const u_id = sessionStorage.getItem("loggedInUserId")
 
+  useEffect(()=>{
+  axios.get(`${url}/getusers/${u_id}`).then((res) => {
+    if(res.data.success){
+      console.log(res.data)
+      const user = res.data.rows[0]
+      setName(user.name)
+      setEmail(user.email)
+      setPhonenumber(user.phonenumber)
   }
   else{
       const msg = res.data.message;
-      console.log(msg);
+      setErr(msg);
   }
 }
 )
-    
 }, []);
+  
+
+
     return (
       <motion.div initial='initial' animate='animate'>
             <Nav />
@@ -71,9 +80,9 @@ function Userprofile() {
                 <div className='Userd'>
                     <motion.h2 variants={fadeInUp}>User Details</motion.h2>         
                                 <ul>
-                                    <motion.li variants={fadeInUp}><span>Name: </span><br />{pname}</motion.li>
+                                    <motion.li variants={fadeInUp}><span>Name: </span><br />{name}</motion.li>
                                     <motion.li variants={fadeInUp}><span>Email: </span><br />{email}</motion.li>    
-                                    <motion.li variants={fadeInUp}><span>Phone No: </span><br />{phno}</motion.li>
+                                    <motion.li variants={fadeInUp}><span>Phone No: </span><br />{phonenumber}</motion.li>
                                 </ul>
                     <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Edit Details</motion.button>
                     </div>
