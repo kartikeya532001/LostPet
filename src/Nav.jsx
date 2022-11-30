@@ -1,11 +1,8 @@
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import "./Assets/CSS/Nav.scss";
 import {motion} from 'framer-motion';
-import {FaBehance, FaDribble} from 'react-icons/fa';
-import {IoMailOutline, IoChevronForwardCircle, IoStar} from 'react-icons/io5';
-import {Iconcontext} from 'react-icons';
 import { useState, useEffect, React } from 'react';
-import axios from "axios";
+
 
 const url = process.env.url || 'http://localhost:5000';
 
@@ -40,22 +37,6 @@ const header = {
 
 function Nav() {
 
-//   const [name, setName] = useState("");
-//   const u_id = 2;
-//   useEffect(()=>{
-//     axios.get(`${url}/getusers/${u_id}`).then((res) => {
-//       if(res.data.success){
-//         const user = res.data.rows[0];
-//         setName(user.name);  
-//     }
-//     else{
-//         const msg = res.data.message;
-//         console.log(msg);
-//     }
-// }
-// )
-      
-//   }, []);
   const history = useHistory()
   const [loginLogout, setLoginLogout] = useState("")
   

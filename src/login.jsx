@@ -109,7 +109,7 @@ function Login() {
       <motion.input type='email' name='email' placeholder='Enter your Email' onChange={onChange} variants={fadeInUp} /> <br />
       <motion.input type='password' name='password' placeholder='Enter your password' onChange={onChange} variants={fadeInUp}/> <br />
       <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {verifypassword} >Login</motion.button>
-      <p>{err} </p>
+      <p style={{color:'#000000',marginLeft:'250px',marginTop:'20px',fontWeight:'700'}}>{err} </p>
       </form>
     </div>
   </motion.div>

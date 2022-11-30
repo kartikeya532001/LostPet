@@ -122,9 +122,8 @@ function Signup() {
       <motion.input type='email' name='email' placeholder='Enter your Email'  onChange={onChange} variants={fadeInUp}/> <br />
       <motion.input type='password' name='password' placeholder='Enter your password' onChange={onChange} variants={fadeInUp}/> <br />
       <motion.input type='text' name='phonenumber' placeholder='Enter your PhoneNo' onChange={onChange} variants={fadeInUp}/> <br />
-      <p>{Err} </p>
       <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {addUser}>SignUp</motion.button>
-      
+      <p style={{color:'#000000',marginLeft:'250px',marginTop:'20px',fontWeight:'700'}}>{Err} </p>
       </form>
     </div>
   </motion.div>

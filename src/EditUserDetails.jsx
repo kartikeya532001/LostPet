@@ -102,7 +102,7 @@ function EditUserDetails() {
       <motion.input type='text' name='category' placeholder='Enter your Email' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
       <motion.input type='text' name='breed' placeholder='Enter your PhoneNo' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
       <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {addPet} >Update</motion.button>
-      <p>{Err} </p>
+      <p style={{color:'#000000',marginLeft:'250px',marginTop:'20px',fontWeight:'700'}}>{Err} </p>
       </form>
     </div>
   </motion.div>

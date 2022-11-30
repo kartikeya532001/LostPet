@@ -2,7 +2,7 @@ import "./Assets/CSS/App.css";
 import { Link, Redirect } from 'react-router-dom';
 import Nav from "./Nav";
 import { motion } from "framer-motion";
-import Data from "./PetListD";
+
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
