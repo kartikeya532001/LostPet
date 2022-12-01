@@ -79,6 +79,10 @@ function PetDetails() {
 )
 }, []);
 
+  function setOwner(){
+    sessionStorage.setItem('reciever_id', o_id)
+  }
+
     return (
       <motion.div initial='initial' animate='animate'>
             <Nav />
@@ -111,7 +115,7 @@ function PetDetails() {
                                 </ul>
                             </div>
                     </div>
-                    <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Contact Owner</motion.button>
+                    <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {setOwner}>Contact Owner</motion.button>
                     </div>
                 </div>
             

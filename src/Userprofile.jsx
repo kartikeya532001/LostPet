@@ -84,7 +84,7 @@ function Userprofile() {
                                     <motion.li variants={fadeInUp}><span>Email: </span><br />{email}</motion.li>    
                                     <motion.li variants={fadeInUp}><span>Phone No: </span><br />{phonenumber}</motion.li>
                                 </ul>
-                    <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Edit Details</motion.button>
+                    <Link to = '/edituserdetails'><motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}>Edit Details</motion.button></Link>
                     </div>
                 </div>
             

@@ -42,7 +42,8 @@ const fadeInUp = {
 
 function EditUserDetails() {
 
-  const [credentials, setCredentials] = useState({name:"", category:"", breed:"" ,colour:"", gender:"",  marks:"", license:"" });
+  
+  const [credentials, setCredentials] = useState({name:"", phonenumber: "" });
   const [Err, setErr] = useState("");
 
   let history = useHistory();
@@ -53,46 +54,31 @@ function EditUserDetails() {
  
 
   
-  function addPet(){
-    
-    if(credentials.name == '' || credentials.breed == '' || credentials.colour == '' || credentials.gender == '' || credentials.category == '' || credentials.marks == '' || credentials.license == '')
+  function editUser(){
+    console.log(credentials.phonenumber+ "  ada ")
+    if(credentials.name == '' || credentials.phonenumber == '')
     {
       setErr("Empty fields");
     }
-
     else if (phonenumber(credentials.phonenumber) == false || credentials.phonenumber.length != 10){
       setErr("PhoneNo Invalid");
     }
     else if (checkname(credentials.name) == false){
       setErr("Name Invalid");
     }
-    
-    else if (checkmail(credentials.email) == false){
-      setErr("Email Invalid");
-    }
 
     else{
-      const o_id = sessionStorage.getItem("loggedInUserId")
-      const suid = new ShortUniqueId({ length: 8 });
-      var p_id = suid();
-      console.log(p_id)
-      axios.post(`${url}/pidexists`, {"p_id": p_id})
+      
+      const u_id = sessionStorage.getItem("loggedInUserId")
+      
+      axios.post(`${url}/updateuser`, {"u_id": u_id, "name": credentials.name, "phonenumber": credentials.phonenumber})
       .then((res)=>{
         if(!res.data.success){
-          console.log("Existing p_id detected")
-          p_id = suid();
+          setErr(res.data.message)
         }
-        console.log("returning")
-        axios.post(`${url}/addpet`, {"p_id": p_id,"o_id":o_id, "name":credentials.name, "breed":credentials.breed ,"colour":credentials.colour, "gender":credentials.gender, "category":credentials.category, "marks":credentials.marks, "license":credentials.license })
-        .then((res) => {
-          console.log("called")
-          if(!res.data.success){
-            setErr(res.data.message);
-        }else{
-          console.log(res.data.message)
-          history.push("/userhome"); 
+        else{
+          history.push('/userhome')
         }
-        })
       }, (err)=>{console.log(err)})
     }
   }
@@ -114,13 +100,6 @@ function EditUserDetails() {
     return result;
  }
 
- function checkmail(name){
-    var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    var isValid = regex.test(name);
-    var result = true;
-    result = (!isValid) ? false : true
-    return result;
- }
 
   return (
   <motion.div initial='initial' animate='animate'>
@@ -135,10 +114,10 @@ function EditUserDetails() {
     <div className='right_content_wrapper2'>
       <motion.h2> <motion.span variants={fadeInUp}>Edit User Details</motion.span></motion.h2>
       <form action="" className='pet'>
-      <motion.input type='text' name='name' placeholder='Enter your Name' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='category' placeholder='Enter your Email' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='breed' placeholder='Enter your PhoneNo' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {addPet} >Update</motion.button>
+      <motion.input type='text' name='name' placeholder='Enter your Name' onChange={onChange} variants={fadeInUp}  /> <br />
+      {/* <motion.input type='text' name='category' placeholder='Enter your Email' onChange={onChange} variants={fadeInUp}  /> <br /> */}
+      <motion.input type='text' name='phonenumber' placeholder='Enter your PhoneNo' onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {editUser} >Update</motion.button>
       <p style={{color:'#000000',marginLeft:'250px',marginTop:'20px',fontWeight:'700'}}>{Err} </p>
       </form>
     </div>
