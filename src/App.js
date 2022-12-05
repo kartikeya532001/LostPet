@@ -13,6 +13,7 @@ import DisplayPets from "./DisplayPets";
 import DisplayPetsN from "./DisplayPetsN";
 import EditPet from "./EditPetDetails";
 import EditUser from "./EditUserDetails";
+import Request from "./Request";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/displaypetsn" component={DisplayPetsN} /> 
         <Route exact path="/editpetdetails" component={EditPet} /> 
         <Route exact path="/edituserdetails" component={EditUser} /> 
+        <Route exact path="/requests" component={Request} /> 
       </Switch>
     <Footer />
     </>

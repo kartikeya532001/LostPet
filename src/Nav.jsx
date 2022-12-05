@@ -67,6 +67,11 @@ function Nav() {
     <motion.header variants={stagger}>
     <motion.div className='logo_wrapper' variants={header} onClick = {()=>{history.push('/')}} style={{cursor: 'pointer'}}>Lost<span>Pets</span></motion.div>
     <motion.div className='menu_container'>
+    <Link to='/requests' style={{color:'#000000',textDecoration: 'none', marginRight:'25px'}}>
+    <motion.span variants={header} style={{width:'85px'}}>
+      Requests
+    </motion.span>
+    </Link>
     <Link to='/userprofile' style={{color:'#000000',textDecoration: 'none'}}>
     <motion.span variants={header} style={{width:'85px'}}>
       Profile
