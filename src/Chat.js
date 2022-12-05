@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import io from 'socket.io-client'
 import { useState } from 'react';
 
-function Chat({socket, sender_id, reciever_id, room}) {  
+function Chat({socket, sender_id, receiver_id, room}) {  
 
     const [currMsg, setCurrMsg] = useState("")
     const[msgList, setMsgList] = useState([])
@@ -24,7 +24,7 @@ function Chat({socket, sender_id, reciever_id, room}) {
   }
   
     useEffect(()=>{
-        socket.on("recieve_msg", (data)=>{
+        socket.on("receive_msg", (data)=>{
         setMsgList((list) => [...list, data])
     })
     }, [socket])

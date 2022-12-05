@@ -1,4 +1,4 @@
-import { Link, Redirect, useLocation, useParams } from 'react-router-dom';
+import { Link, Redirect, useLocation, useParams, useHistory } from 'react-router-dom';
 import "./Assets/CSS/petdetails.scss";
 import {motion} from 'framer-motion';
 import Nav from './Nav';
@@ -41,7 +41,7 @@ function PetDetails() {
   //the p_id should be sent here via props or have to included in the urls like /petdetails/${p_id}
 
   //const p_id = "6f5ggs"
-
+  let history = useHistory();
   const [petname, setPetname] = useState("");
   const [o_id, setO_id] = useState();
   const [ownername, setOwnername] = useState("");
@@ -80,7 +80,21 @@ function PetDetails() {
 }, []);
 
   function setOwner(){
-    sessionStorage.setItem('reciever_id', o_id)
+    sessionStorage.setItem('receiver_id', o_id)
+    // technically here the user has to be logged in to send the request
+    // store p_id in sessionstorage and redirect to /login if not logged in, when he logs in if p_id exits redirect again to/petdetils/p_id instead of /userhome
+    const s_id = sessionStorage.getItem('loggedInUserId')
+    const r_id = sessionStorage.getItem('receiver_id')
+    axios.post(`${url}/sendrequest`, {"s_id": s_id, "r_id": r_id })
+    .then((res)=>{
+      if(res.data.success){
+        history.push("/userhome");         
+      }
+      else{
+          setErr(res.data.message);
+      }
+    }, (err)=>{console.log(err)})
+    
   }
 
     return (

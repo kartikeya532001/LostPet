@@ -41,35 +41,44 @@ const fadeInUp = {
 
 
 
-function DisplayPets() {
+function DisplayRequests() {
 
   const history = useHistory();
-  const o_id = sessionStorage.getItem("loggedInUserId");
-  const [pets, setPets] = useState([])
+  const u_id = sessionStorage.getItem("loggedInUserId");
+  const [requests, setRequests] = useState([])
   const [Err, setErr] = useState("")
   const [num, setNum] = useState(5)
   useEffect(() => {
-    axios.get(`${url}/getownerpets/${o_id}`)
+    axios.post(`${url}/getrequests`, {"r_id": u_id})
     .then((res)=>{
       console.log("here")
       if(res.data.success){
-        const petsArray = res.data.rows
-        setPets(petsArray)
-        console.log(petsArray)
-        console.log(pets)
+        const requestsArray = res.data.rows
+        setRequests(res.data.rows)
+        console.log(requests)
         setNum(1)
       }
       else{
         setNum(1)
         console.log("else")
-        setErr("0 registered pets found")
+        setErr("Currenty No Requests found")
       }
     }, (err)=>{console.log(err)})
 
 
   }, [num]);
 
+  // function acceptRequest(s_id){
+  //   // ideally here s_id = requests[x].sender_id
+  //   axios.post(`${url}/acceptrequest`, {"s_id": s_id, "r_id": u_id})
+  //   .then((res)=>{
+  //     axios.post(`${url}/newchat`, {"s_id": u_id, "r_id": s_id})
+  //     .then((res)=>{
+  //       console.log(res.data.message)
+  //     }, (err)=>{console.log(err)})
 
+  //   }, (err)=>{console.log(err)})
+  // }
 
 
   return (
@@ -89,19 +98,24 @@ function DisplayPets() {
                     </motion.h2>
                     <motion.table variants={fadeInUp}>
                     <tr>
-                      <th>Pet ID</th>
+                      <th>Sender ID</th>
                       <th >Name</th>
-                      <th>View Details</th>
+                      <th>Accept/Reject</th>
                     </tr>
                     </motion.table>
-    {pets.map((pets) => (
+        
+        {/* Here a new component will be there for displaying requests just like <Petsd /> 
+        and give options to accpet or reject  */}
+        
+    {/* {requests.map((requests) => (
+      here we will put the accept and reject buttons
       <Petsd
           Pet_ID={pets.p_id}
           name={pets.name}
-          link= {`/petdetails/${pets.p_id}`}
-          
+          link= {`/petdetails/${pets.p_id}`}  
       />
-    ))}
+    ))} */}
+
     </div>
         </div>
     
@@ -110,4 +124,4 @@ function DisplayPets() {
   );
 }
 
-export default DisplayPets;
+export default DisplayRequests;
