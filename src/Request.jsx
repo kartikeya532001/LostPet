@@ -111,8 +111,10 @@ function DisplayRequests() {
     {requests.map((requests) => (
      
      <RequestD 
-        ID={requests.ID}
-         name={requests.name}  
+        s_id={requests.sender_id}
+        s_name={requests.sender_name}  
+        r_id = {requests.receiver_id}
+        r_name = {requests.receiver_name}
      />
    ))}
 

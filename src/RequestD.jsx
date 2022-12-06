@@ -1,7 +1,10 @@
 import "./Assets/CSS/App.css";
 import { Link, Redirect } from 'react-router-dom';
 import { motion } from "framer-motion";
-
+import axios from "axios";
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+const url = process.env.url || 'http://localhost:5000';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -36,12 +39,46 @@ const fadeInUp = {
 
 function RequestD(props) {
 
+  const history = useHistory()
     function accept (){
-        console.log(props.ID);
+        console.log(props);
+        axios.post(`${url}/acceptrequest`, {"s_id" : props.s_id, "r_id": props.r_id})
+        .then((res)=>{
+          console.log("gwg")
+          
+          if(res.data.success){
+            axios.post(`${url}/newchat`, {"s_id" : props.s_id, "r_id": props.r_id})
+            .then((res)=>{
+              if(res.data.success){
+                
+                history.push("/userhome")
+              }
+              else{
+                console.log("Unable to accept the request by "+ props.s_name)
+              }
+
+            }, (err) => {console.log(err)})
+            
+          }
+          else{
+            console.log("Unable to accept the request by "+ props.s_name)
+          }
+
+        }, (err) => {console.log(err)})
     }
+
+
     function reject (){
-        console.log(props.ID);
-        
+      axios.post(`${url}/rejectrequest`, {"s_id" : props.s_id, "r_id": props.r_id})
+      .then((res)=>{
+        if(res.data.success){
+          history.push("/userhome")
+        }
+        else{
+          console.log("Unable to reject the request by "+ props.s_name)
+        }
+
+      }, (err) => {console.log(err)})
     }
   return (
     
@@ -53,7 +90,7 @@ function RequestD(props) {
                       
                       <td style={{
                          paddingRight:'68px',paddingTop: '10px',paddingBottom:'10px',paddingLeft:'20px'
-                        }}>{props.name}</td>
+                        }}>{props.s_name}</td>
                       <td>
                         <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}
                         style={{
