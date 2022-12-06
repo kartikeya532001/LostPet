@@ -2,8 +2,9 @@ import "./Assets/CSS/App.css";
 import Nav from "./Nav";
 import { motion } from "framer-motion";
 import React from "react";
-import Petsd from "./Petsd";
+import RequestD from "./RequestD";
 import { useState, useEffect } from 'react';
+import data from "./Data";
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 const url = process.env.url || 'http://localhost:5000';
@@ -91,30 +92,29 @@ function DisplayRequests() {
             <motion.img src={process.env.PUBLIC_URL + '/images/home.png'} alt='background' initial={{x:0, opacity:0}} animate={{x:100,
                 opacity:1}} transition={{duration:0.5,delay:.8}} />
         </motion.div>
-        <div className='right_content_wrapper3'>
-            <div className='Petd'>
-                    <motion.h2 variants={fadeInUp} style={{marginLeft:'120px', marginTop:'-160px',marginBottom:'30px'}}>
+        <div className='right_content_wrapper3' >
+            <div className='Petd' >
+                    <motion.h2 variants={fadeInUp} style={{marginLeft:'80px', marginTop:'-40px',marginBottom:'10px'}}>
                         List of Requests
                     </motion.h2>
-                    <motion.table variants={fadeInUp}>
+                    <motion.table variants={fadeInUp} >
                     <tr>
-                      <th>Sender ID</th>
-                      <th >Name</th>
-                      <th>Accept/Reject</th>
+                      <th style={{paddingRight:'60px',paddingLeft:'30px'}} >Name</th>
+                      <th style={{paddingLeft:'50px'}} >Accept/Reject</th>
                     </tr>
                     </motion.table>
         
         {/* Here a new component will be there for displaying requests just like <Petsd /> 
         and give options to accpet or reject  */}
         
-    {/* {requests.map((requests) => (
-      here we will put the accept and reject buttons
-      <Petsd
-          Pet_ID={pets.p_id}
-          name={pets.name}
-          link= {`/petdetails/${pets.p_id}`}  
-      />
-    ))} */}
+ 
+    {requests.map((requests) => (
+     
+     <RequestD 
+        ID={requests.ID}
+         name={requests.name}  
+     />
+   ))}
 
     </div>
         </div>
