@@ -1,13 +1,13 @@
 import "./Assets/CSS/App.css";
 import { Switch, Route } from "react-router-dom";
 import Nav from "./Nav";
-import Chat from "./Chat";
+// import Chat from "./Chat";
 import io from 'socket.io-client'
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Sidebar from "./components/Sidebar";
-import Chats from "./components/chat";
+import Chat from "./components/chat";
 import "./Assets/CSS/UserHome.scss";
 const url = process.env.url || 'http://localhost:5000';
 
@@ -68,7 +68,7 @@ function UserHome() {
       <div className="container">
 
         <Sidebar />
-        <Chats />
+        <Chat />
 
       </div>
 

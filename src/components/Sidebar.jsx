@@ -1,11 +1,10 @@
 import React from "react";
 import Navbar from "./Navbar";
-import data from "./Data";
 import io from 'socket.io-client'
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import Chats from "./Chats";
+import RecentChat from "./RecentChat";
 
 const url = process.env.url || 'http://localhost:5000';
 
@@ -58,7 +57,7 @@ const Sidebar = () => {
       <Navbar />
 
       {userChats.map((chats) => (
-     <Chats 
+     <RecentChat
         r_id={chats.receiver_id}
         r_name={chats.receiver_name}  
      />
