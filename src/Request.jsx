@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import React from "react";
 import RequestD from "./RequestD";
 import { useState, useEffect } from 'react';
-import data from "./Data";
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 const url = process.env.url || 'http://localhost:5000';

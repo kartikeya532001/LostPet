@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 // import { ChatContext } from "../context/ChatContext";
 // import { db } from "../firebase";
 
-const Chats = () => {
+const Chats = (props) => {
   // const [chats, setChats] = useState([]);
 
   // const { currentUser } = useContext(AuthContext);
@@ -32,16 +32,20 @@ const Chats = () => {
     <div className="chats">
       {/* {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => ( */}
         <div
-          className="userChat"
+          className="userChat" 
           // key={chat[0]}
           // onClick={() => handleSelect(chat[1].userInfo)}
         >
           {/* <img src={chat[1].userInfo.photoURL} alt="" /> */}
-          <div className="userChatInfo">
+          <div className="userChatInfo" >
             {/* <span>{chat[1].userInfo.displayName}</span> */}
-            <span>kartikeya</span>
+            <span>{props.name}</span>
+            {/* <p>hdhsiu;</p> */}
+           
             {/* <p>{chat[1].lastMessage?.text}</p> */}
-              <p>Hello</p>
+              
+           
+             
           </div>
         </div>
     </div>

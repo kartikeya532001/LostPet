@@ -4,34 +4,11 @@ const Data = [
         name: 'Kartikeya'
        
     },
-
     {
         ID:"123",
         name: 'sekhar'
        
     },
-  
-  
-  
-  
-  
-
-  
-  
-
-
-    
-    
-    
-    
-    
-    
-  
-   
-  
-
-
-
    
 ];
 
