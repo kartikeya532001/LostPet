@@ -39,7 +39,7 @@ const Chats = (props) => {
           {/* <img src={chat[1].userInfo.photoURL} alt="" /> */}
           <div className="userChatInfo" >
             {/* <span>{chat[1].userInfo.displayName}</span> */}
-            <span>{props.name}</span>
+            <span>{props.r_name}</span>
             {/* <p>hdhsiu;</p> */}
            
             {/* <p>{chat[1].lastMessage?.text}</p> */}
