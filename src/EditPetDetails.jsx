@@ -191,13 +191,13 @@ function EditPetDetails() {
     <div className='right_content_wrapper2'>
       <motion.h2> <motion.span variants={fadeInUp} style={{marginLeft:'12px'}}>Edit Pet Details</motion.span></motion.h2>
       <form action="" className='pet'>
-      <motion.input type='text' name='name' placeholder='Enter your Pet Name' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='category' placeholder='Enter your pet category' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='breed' placeholder='Enter your Pet Breed' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='colour' placeholder='Enter your Pet Colour' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='gender' placeholder='Enter your Pet Gender' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='marks' placeholder='Enter your Pet Marks' onChange={onChange} variants={fadeInUp} value='{somaU}' /> <br />
-      <motion.input type='text' name='license' placeholder='Enter your Pet License No' onChange={onChange} variants={fadeInUp} value='{somaU}'/> <br />
+      <motion.input type='text' name='name' placeholder='Enter your Pet Name' onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.input type='text' name='category' placeholder='Enter your pet category' onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.input type='text' name='breed' placeholder='Enter your Pet Breed' onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.input type='text' name='colour' placeholder='Enter your Pet Colour' onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.input type='text' name='gender' placeholder='Enter your Pet Gender' onChange={onChange} variants={fadeInUp}  /> <br />
+      <motion.input type='text' name='marks' placeholder='Enter your Pet Marks' onChange={onChange} variants={fadeInUp} /> <br />
+      <motion.input type='text' name='license' placeholder='Enter your Pet License No' onChange={onChange} variants={fadeInUp} /> <br />
       <motion.button type= 'button' variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick = {addPet} >Update</motion.button>
       <p style={{color:'#000000',marginLeft:'250px',marginTop:'20px',fontWeight:'700'}}>{Err} </p>
       </form>
