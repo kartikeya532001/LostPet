@@ -51,7 +51,7 @@ function Petsd(props) {
                       <Link to = {props.link}>
                         <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}
                         style={{
-                        height:'30px',width:'80px', marginLeft:'10px', marginTop: '0px',fontSize:'15px'
+                        height:'45px',width:'80px', marginLeft:'10px', marginTop: '0px',fontSize:'15px'
                         }}
                         >
                           View Details

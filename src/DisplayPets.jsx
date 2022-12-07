@@ -84,13 +84,13 @@ function DisplayPets() {
         </motion.div>
         <div className='right_content_wrapper3'>
             <div className='Petd'>
-                    <motion.h2 variants={fadeInUp} style={{marginLeft:'120px', marginTop:'-160px',marginBottom:'30px'}}>
+                    <motion.h2 variants={fadeInUp} style={{marginLeft:'120px', marginTop:'-80px',marginBottom:'30px'}}>
                         List of Pets
                     </motion.h2>
                     <motion.table variants={fadeInUp}>
                     <tr>
                       <th>Pet ID</th>
-                      <th >Name</th>
+                      <th style={{paddingLeft: '40px', paddingRight: '40px'}}>Name</th>
                       <th>View Details</th>
                     </tr>
                     </motion.table>

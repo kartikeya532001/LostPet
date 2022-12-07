@@ -72,16 +72,11 @@ function PetDetails() {
       setLicense(pet.license);
   }
   else{
-      setmsgs();
+    setMsg(res.data.message);
   }
 }
 )
 }, []);
-
-function setmsgs(){
-   
-      setMsg(res.data.message);
-}
 
   function setOwner(){
     sessionStorage.setItem('receiver_id', o_id)
