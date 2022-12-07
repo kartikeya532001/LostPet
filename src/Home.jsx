@@ -2,6 +2,7 @@ import { Link, Redirect } from 'react-router-dom';
 import "./Assets/CSS/Home.scss";
 import {motion} from 'framer-motion';
 import { useState, React } from 'react';
+import { useHistory } from 'react-router-dom';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
@@ -124,10 +125,40 @@ const header = {
 function Home() {
   
   const [text, setText] = useState('');
+  const [Err, setErr] = useState("");
+
+
 
   const handleChange = event => {
     setText(event.target.value);
   };
+   
+  let history = useHistory();
+
+  function checkPetID(){
+    
+    if(text == '')
+    {
+      setErr("Empty fields");
+    }
+    else if (checkID(text) == false ){
+      setErr("Invalid PetID");
+    }
+    else if (text.length !=8){
+      setErr("Invalid PetID");
+    }
+    else {
+      history.push(`/petdetails/${text}`); 
+    }
+  }
+
+  function checkID(ID){
+    var regex = /^[A-Za-z0-9]*$/;
+    var isValid = regex.test(ID);
+    var result = true;
+    result = (!isValid) ? false : true
+    return result;
+  }
 
   return (
     <motion.div initial='initial' animate='animate'>
@@ -197,8 +228,11 @@ function Home() {
               <motion.p className='total_review' variants={star}> Enter Pet Id to be searched</motion.p>
               <form method='post' action='' className='forms'>
                 <motion.input type='String' name='Pet_ID' placeholder= 'Enter Pet ID'  variants={star} onChange = {handleChange} /> <br /> 
-                <Link to ={`/petdetails/${text}`}><motion.button type= 'button' variants={star} whileHover={{scale:1.05}} whileTap={{scale:0.95}} > Search </motion.button></Link>
+                {/* <Link to ={`/petdetails/${text}`}> */}
+                <motion.button type= 'button' variants={star} whileHover={{scale:1.05}} whileTap={{scale:0.95}} onClick={checkPetID} style={{marginTop:'15px'}}> Search </motion.button>
+                {/* </Link> */}
               </form>
+              <p style={{color:'#000000',marginLeft:'70px',fontWeight:'700',marginTop:'10px'}}>{Err}</p>
             </motion.div>
         </div> 
         <motion.div className='right_content_wrapper'>
