@@ -1,6 +1,7 @@
 import "./Assets/CSS/App.css";
 import Nav from "./Nav";
 import { motion } from "framer-motion";
+import { Link, Redirect } from 'react-router-dom';
 import React from "react";
 import Petsd from "./Petsd";
 import { useState, useEffect } from 'react';
@@ -102,6 +103,15 @@ function DisplayPets() {
           
       />
     ))}
+    <Link to = '/petregistration'>
+                        <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}
+                        style={{
+                        height:'45px',width:'80px', marginLeft:'73px', marginTop: '10px',fontSize:'15px'
+                        }}
+                        >
+                          Add Pet
+                        </motion.button>
+                      </Link>
     </div>
         </div>
     
