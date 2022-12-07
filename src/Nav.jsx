@@ -39,17 +39,18 @@ function Nav() {
 
   const history = useHistory()
   const [loginLogout, setLoginLogout] = useState("")
-  
+  const [link, setLink] = useState('/')
   useEffect(() => {
     const loggedInUserId = sessionStorage.getItem("loggedInUserId");
     if (loggedInUserId) {
       setLoginLogout("Logout") 
+      setLink('/userhome')
     }
     else{
       setLoginLogout("Login")
     }
   }, []);
-
+  
   function loginLogoutClick(){
     const loggedInUserId = sessionStorage.getItem("loggedInUserId");
     if (loggedInUserId) {
@@ -65,7 +66,7 @@ function Nav() {
   return (
     <motion.div initial='initial' animate='animate'>
     <motion.header variants={stagger}>
-    <motion.div className='logo_wrapper' variants={header} onClick = {()=>{history.push('/')}} style={{cursor: 'pointer'}}>Lost<span>Pets</span></motion.div>
+    <motion.div className='logo_wrapper' variants={header} onClick = {()=>{history.push(link)}} style={{cursor: 'pointer'}}>Lost<span>Pets</span></motion.div>
     <motion.div className='menu_container'>
     <Link to='/requests' style={{color:'#000000',textDecoration: 'none', marginRight:'25px'}}>
     <motion.span variants={header} style={{width:'85px'}}>

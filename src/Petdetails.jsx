@@ -79,10 +79,13 @@ function PetDetails() {
 }, []);
 
   function setOwner(){
+    const s_id = sessionStorage.getItem('loggedInUserId')
+    if(s_id == null){
+      history.push('/login')
+    }
     sessionStorage.setItem('receiver_id', o_id)
     // technically here the user has to be logged in to send the request
     // store p_id in sessionstorage and redirect to /login if not logged in, when he logs in if p_id exits redirect again to/petdetils/p_id instead of /userhome
-    const s_id = sessionStorage.getItem('loggedInUserId')
     const r_id = sessionStorage.getItem('receiver_id')
     axios.post(`${url}/sendrequest`, {"s_id": s_id, "r_id": r_id })
     .then((res)=>{

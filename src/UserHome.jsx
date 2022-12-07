@@ -102,7 +102,7 @@ function UserHome() {
               <div key={msgList}>
                   <div className="message" style={{display:'flex',flexDirection:'row-reverse'}}>
                     <div className="messageContent" >
-                      <p >{msgContent.message}</p>
+                      <p style={{borderRadius: '10px 0px 10px 10px'}}>{msgContent.message}</p>
                     </div>
                   </div>
                 </div>

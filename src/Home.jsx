@@ -148,6 +148,7 @@ function Home() {
       setErr("Invalid PetID");
     }
     else {
+      sessionStorage.setItem('searchPetId', text)
       history.push(`/petdetails/${text}`); 
     }
   }

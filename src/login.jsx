@@ -83,7 +83,15 @@ function Login() {
       if(res.data.success){
         const u_id = res.data.u_id
         sessionStorage.setItem("loggedInUserId", u_id);
-        history.push("/userhome");         
+        const p_id = sessionStorage.getItem('searchPetId')
+        console.log(p_id)
+        if(p_id == null){
+          history.push("/userhome");     
+        }
+        else{
+          history.push(`/petdetails/${p_id}`);     
+        }
+            
       }
       else{
           setErr(res.data.message);
