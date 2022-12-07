@@ -52,7 +52,7 @@ function PetDetails() {
   const [marks, setMarks] = useState("");
   const [license, setLicense] = useState("");
   const [Err, setErr] = useState("");
-  
+  const [msg, setMsg] = useState("");
   const params = useParams();
   const p_id = params.p_id
 
@@ -72,8 +72,7 @@ function PetDetails() {
       setLicense(pet.license);
   }
   else{
-      const msg = res.data.message;
-      setErr(msg);
+    setMsg(res.data.message);
   }
 }
 )
@@ -96,9 +95,10 @@ function PetDetails() {
     }, (err)=>{console.log(err)})
     
   }
-
+    if ( msg == '') {
     return (
       <motion.div initial='initial' animate='animate'>
+           
             <Nav />
             <motion.div className='content_wrapper2' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=
             {{duration:0.3,ease:easeing}}>
@@ -138,5 +138,33 @@ function PetDetails() {
    
     );
   }
-  
+  else {
+    return (
+      <motion.div initial='initial' animate='animate'>
+           
+            <Nav />
+            <motion.div className='content_wrapper2' initial={{opacity:0,scale:0}} animate={{opacity:1,scale:1}} transition=
+            {{duration:0.3,ease:easeing}}>
+            
+                <motion.div className='left_content_wrapper2'>
+                    <motion.img src={process.env.PUBLIC_URL + '/images/home.png'} alt='background' initial={{x:0, opacity:0}} animate={{x:100,
+                        opacity:1}} transition={{duration:0.5,delay:.8}} />
+                </motion.div>
+                <div className='right_content_wrapper3'>
+                  <div className='Petd'>
+                    <motion.h2 variants={fadeInUp} style={{marginTop:'40px'}}> Pet Details</motion.h2>
+                      <div className='flex'>
+                        <p>Pet ID Not Found.</p>
+                      </div>
+                    
+                  </div>
+                </div>
+            
+            </motion.div>
+      </motion.div>
+   
+    );
+  }
+}
+
   export default PetDetails;
