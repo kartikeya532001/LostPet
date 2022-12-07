@@ -19,9 +19,8 @@ import Request from "./Request";
 function App() {
   return (
     <>
-    <DisplayPets />
     <ScrollToTop /> 
-      {/* <Switch>
+      <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} /> 
         <Route exact path="/signup" component={Signup} /> 
@@ -34,7 +33,7 @@ function App() {
         <Route exact path="/editpetdetails" component={EditPet} /> 
         <Route exact path="/edituserdetails" component={EditUser} /> 
         <Route exact path="/requests" component={Request} /> 
-      </Switch> */}
+      </Switch>
     <Footer />
     </>
  

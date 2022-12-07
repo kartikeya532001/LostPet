@@ -1,5 +1,5 @@
 import "./Assets/CSS/App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Nav from "./Nav";
 // import Chat from "./Chat";
 import io from 'socket.io-client'
@@ -22,19 +22,18 @@ function UserHome() {
   const [userChats, setUserChats] = useState([])
   const [num, setNum] = useState(5)
   const [view, setView] = useState("fasle")
+  const[sender_id, setSender_id] = useState("")
+  const[receiver_id, setReceiver_id] = useState("")
+  const[sender_name, setSender_name] = useState("")
+  const[receiver_name, setReceiver_name] = useState("")
+  const[room, setRoom] = useState("")
+  const[msgHistory, setMsgHistory] = useState([])
+  const [currMsg, setCurrMsg] = useState("")
+  const[msgList, setMsgList] = useState([])  
 
 
-  const sender_id = sessionStorage.getItem('loggedInUserId')
-  const receiver_id = sessionStorage.getItem('receiver_id')
-  // const sender_id = "babd"
-  // const receiver_id = "bwg"
-  
-  var room = ""
-  if(sender_id <= receiver_id)
-    room = sender_id+receiver_id
-  if(sender_id>receiver_id)
-    room = receiver_id+sender_id
-  //console.log(room)
+  useEffect(()=>{setMsgHistory([])},[room])
+
 
   const joinRoom = ()=> {
     if(room !==  ""){
@@ -60,7 +59,116 @@ function UserHome() {
 
   },[num])
 
-  // var view ="false";
+  const sendMsg = ()=>{
+    
+    if(currMsg !== ""){
+      const msgdata = {
+        room: room,
+        author: sender_id,
+        message: currMsg,
+        time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
+      }
+      setCurrMsg("")
+      // axios.addchatmessage will be here before emitting
+
+
+      socket.emit("send_msg", msgdata)
+      
+      //setMsgList((list) => [...list, msgdata])
+
+    }
+  }
+
+  useEffect(()=>{
+    socket.on("receive_msg", (data)=>{
+    setMsgList((list) => [...list, data])
+  })
+  }, [socket])
+
+  function rend(){
+      
+    if(view == "true"){
+      return (
+        <>
+        <div className="chat">
+          <div className="chatInfo">
+            <span>{receiver_name}</span>
+          </div>
+          <div className="messages">
+          {msgList.map((msgContent)=>{
+            if(msgContent.author == sender_id){
+
+            return(
+              <div key={msgList}>
+                  <div className="message" style={{display:'flex',flexDirection:'row-reverse'}}>
+                    <div className="messageContent" >
+                      <p >{msgContent.message}</p>
+                    </div>
+                  </div>
+                </div>
+                )
+            }
+            else{
+              return(
+                <div key={msgList}>
+              <div className="message" >
+                    <div className="messageContent">
+                      <p >{msgContent.message}</p>
+                    </div>
+                  </div>
+                  </div>
+              )
+            }
+            })
+            
+            }
+              
+        </div>
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Type something..." value={currMsg} onChange={(e)=>{setCurrMsg(e.target.value)}} onKeyPress={(event) => {event.key == 'Enter' &&  sendMsg()}}/>
+          
+          <div className="send">
+            <button onClick={sendMsg}>Send</button>
+          </div>
+        </div>
+        </div>
+        </>
+      );
+    }
+    else{
+      return (
+        <>
+        <div className="chat">
+          <div className="chatInfo">
+            {/* <span>Kartikeya</span> */}
+          </div>
+          <div className="messages">
+            {/* <Message /> */}
+      
+        </div>
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Type something..."
+          />
+          <div className="send">
+            <button>Send</button>
+          </div>
+        </div>
+        </div>
+        </>
+      );
+    }
+  
+  
+  
+  }
+
+
+
+
   return (
     <>
     <Nav />
@@ -74,23 +182,40 @@ function UserHome() {
       <div className="sidebar">
       <Navbar />
 
-   {data.map((chats)=>{
+   {userChats.map((chats)=>{
      return(
           <>
             <div className="chats">
               <div className="userChat" >        
                 <div className="userChatInfo" >
-                  <span onClick={()=>(setView("true"))}>{chats.r_name}</span>             
+                  <span onClick={()=>{
+                    
+                    // axios.getUserchat will be here
+                    socket.emit("join_room", chats.c_id)
+                    setView("true"); 
+                    setSender_id(chats.sender_id); 
+                    setReceiver_id(chats.receiver_id); 
+                    setReceiver_name(chats.receiver_name); 
+                    setRoom( chats.c_id);
+
+                    setMsgList([])
+                    console.log(msgHistory)
+                    }}>{chats.receiver_name}</span>             
                 </div>
               </div>
             </div>
+            
           </>
           )
         })}
    </div>
         
-        <Chat viewable = {view} />
+    
 
+      {rend()}
+   {/* <Chat viewable = {view} socket = {socket} sender_id = {sender_id} receiver_id={receiver_id} room={room} receiver_name = {receiver_name} messageHistory = {msgHistory}/> */}
+   
+        
       </div>
 
     </div>
