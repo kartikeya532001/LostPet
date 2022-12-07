@@ -90,8 +90,8 @@ function DisplayPets() {
                     <motion.table variants={fadeInUp}>
                     <tr>
                       <th>Pet ID</th>
-                      <th style={{paddingLeft: '40px',paddingRight: '40px'}}>Name</th>
-                      <th>View Details</th>
+                      <th style={{paddingLeft: '40px',paddingRight: '50px'}}>Name</th>
+                      <th>Edit Details</th>
                     </tr>
                     </motion.table>
     {pets.map((pets) => (
