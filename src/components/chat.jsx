@@ -8,9 +8,9 @@ import Message from "./Message";
 
 // import { ChatContext } from "../context/ChatContext";
 
-const Chat = () => {
+const Chat = (props) => {
 
-
+if(props.viewable == "true"){
   return (
     <>
     <div className="chat">
@@ -33,6 +33,32 @@ const Chat = () => {
     </div>
     </>
   );
+}
+else{
+  return (
+    <>
+    <div className="chat">
+      <div className="chatInfo">
+        {/* <span>Kartikeya</span> */}
+      </div>
+      <div className="messages">
+        {/* <Message /> */}
+   
+    </div>
+    <div className="input">
+      <input
+        type="text"
+        placeholder="Type something..."
+      />
+      <div className="send">
+        <button>Send</button>
+      </div>
+    </div>
+    </div>
+    </>
+  );
+}
+  
 };
 
 export default Chat;

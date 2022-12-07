@@ -110,7 +110,7 @@ body {
       display: flex;
  
       .sidebar {
-        flex: 1;
+        width: 33.3%;
         background-color: $dark_green;
         position: relative;
        
@@ -200,7 +200,7 @@ body {
         }
       }
       .chat {
-        flex: 2;
+       width: 66.7%;
   
         .chatInfo {
           height: 50px;
@@ -229,7 +229,7 @@ body {
           padding: 10px;
           height: calc(100% - 160px);
           overflow: scroll;
-          height: 80%;
+          height: 79.25%;
   
           .message {
             display: flex;

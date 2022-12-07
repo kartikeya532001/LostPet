@@ -7,7 +7,10 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Sidebar from "./components/Sidebar";
+import RecentChat from "./components/RecentChat";
+import Navbar from "./components/Navbar";
 import Chat from "./components/chat";
+import data from "./Data";
 import "./Assets/CSS/UserHome.scss";
 const url = process.env.url || 'http://localhost:5000';
 
@@ -18,6 +21,7 @@ function UserHome() {
   const [Err, setErr] = useState("")
   const [userChats, setUserChats] = useState([])
   const [num, setNum] = useState(5)
+  const [view, setView] = useState("fasle")
 
 
   const sender_id = sessionStorage.getItem('loggedInUserId')
@@ -56,7 +60,7 @@ function UserHome() {
 
   },[num])
 
-
+  // var view ="false";
   return (
     <>
     <Nav />
@@ -67,8 +71,25 @@ function UserHome() {
     <div className="home">
       <div className="container">
 
-        <Sidebar />
-        <Chat />
+      <div className="sidebar">
+      <Navbar />
+
+   {data.map((chats)=>{
+     return(
+          <>
+            <div className="chats">
+              <div className="userChat" >        
+                <div className="userChatInfo" >
+                  <span onClick={()=>(setView("true"))}>{chats.r_name}</span>             
+                </div>
+              </div>
+            </div>
+          </>
+          )
+        })}
+   </div>
+        
+        <Chat viewable = {view} />
 
       </div>
 
