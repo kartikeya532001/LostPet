@@ -109,7 +109,7 @@ function PetDetails() {
                 </motion.div>
                 <div className='right_content_wrapper3'>
                 <div className='Petd'>
-                    <motion.h2 variants={fadeInUp}> Pet Details</motion.h2>
+                    <motion.h2 variants={fadeInUp} style={{marginTop:'40px'}}> Pet Details</motion.h2>
                     <div className='flex'>
                         <div className='divl'>
                                 <ul>
