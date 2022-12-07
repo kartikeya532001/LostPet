@@ -48,13 +48,13 @@ function Petsd(props) {
                          paddingLeft:'40px', paddingRight:'40px',paddingTop: '20px',paddingBottom:'20px'
                         }}>{props.name}</td>
                       <td>
-                      <Link to = {props.link}>
+                      <Link to = '/editpetdetails'>
                         <motion.button variants={fadeInUp} whileHover={{scale:1.05}} whileTap={{scale:0.95}}
                         style={{
                         height:'45px',width:'80px', marginLeft:'10px', marginTop: '0px',fontSize:'15px'
                         }}
                         >
-                          View Details
+                          Edit Details
                         </motion.button>
                       </Link>
                       </td>
