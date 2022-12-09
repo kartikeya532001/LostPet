@@ -12,12 +12,12 @@ import Navbar from "./components/Navbar";
 import Chat from "./components/chat";
 import data from "./Data";
 import "./Assets/CSS/UserHome.scss";
+import {socket} from './index'
 const url = process.env.url || 'http://localhost:5000';
 
 
 function UserHome() {
-  const socket = io.connect("http://localhost:5001");
-
+  
   const [Err, setErr] = useState("")
   const [userChats, setUserChats] = useState([])
   const [num, setNum] = useState(5)
@@ -59,8 +59,9 @@ function UserHome() {
 
   },[num])
 
-  const sendMsg = ()=>{
-    
+  const sendMsg = async ()=>{
+    console.log("sent button clicked")
+    console.log(currMsg)
     if(currMsg !== ""){
       const msgdata = {
         room: room,
@@ -68,13 +69,16 @@ function UserHome() {
         message: currMsg,
         time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()
       }
+      console.log(msgdata)
       setCurrMsg("")
       // axios.addchatmessage will be here before emitting
-
+      
 
       socket.emit("send_msg", msgdata)
-      
-      //setMsgList((list) => [...list, msgdata])
+      console.log(currMsg)
+      console.log(msgList)
+      setMsgList((list) => [...list, msgdata])
+      console.log(msgList)
 
     }
   }
@@ -88,6 +92,7 @@ function UserHome() {
   function rend(){
       
     if(view == "true"){
+      console.log(msgList)
       return (
         <>
         <div className="chat">
@@ -96,10 +101,11 @@ function UserHome() {
           </div>
           <div className="messages">
           {msgList.map((msgContent)=>{
-            if(msgContent.author == sender_id){
 
+            if(msgContent.author == sender_id){
+              console.log('m')
             return(
-              <div key={msgList}>
+              <div >
                   <div className="message" style={{display:'flex',flexDirection:'row-reverse'}}>
                     <div className="messageContent" >
                       <p style={{borderRadius: '10px 0px 10px 10px'}}>{msgContent.message}</p>
@@ -110,7 +116,7 @@ function UserHome() {
             }
             else{
               return(
-                <div key={msgList}>
+                <div >
               <div className="message" >
                     <div className="messageContent">
                       <p >{msgContent.message}</p>
@@ -196,10 +202,12 @@ function UserHome() {
                     setSender_id(chats.sender_id); 
                     setReceiver_id(chats.receiver_id); 
                     setReceiver_name(chats.receiver_name); 
-                    setRoom( chats.c_id);
+                    setRoom(chats.c_id);
 
                     setMsgList([])
-                    console.log(msgHistory)
+                    console.log(msgList)
+                    console.log(room)
+                    
                     }}>{chats.receiver_name}</span>             
                 </div>
               </div>
