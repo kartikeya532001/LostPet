@@ -188,26 +188,72 @@ function UserHome() {
       <div className="sidebar">
       <Navbar />
 
-   {userChats.map((chats)=>{
+      {userChats.map((chats)=>{
      return(
           <>
             <div className="chats">
               <div className="userChat" >        
                 <div className="userChatInfo" >
                   <span onClick={()=>{
-                    
+                    if(msgList == []){
                     // axios.getUserchat will be here
                     socket.emit("join_room", chats.c_id)
                     setView("true"); 
                     setSender_id(chats.sender_id); 
                     setReceiver_id(chats.receiver_id); 
                     setReceiver_name(chats.receiver_name); 
-                    setRoom(chats.c_id);
-
+                    setRoom( chats.c_id);
                     setMsgList([])
-                    console.log(msgList)
-                    console.log(room)
+                    try{
+                      axios.post(`${url}/getchatbyid`, {"c_id": chats.c_id})
+                    .then((res)=>{
+                        if(res.data.success){
+                          //setMsgList([])
+                          setMsgList(res.data.rows.msgList)
+                        }
+                        else{
+                          setMsgList([])
+                        }
+                    }, (err)=>{console.log(err)})
+
+                    }
+                    catch(err){
+                      setMsgList([])
+                    }
+                    }
+                    else{
+                      
+                      axios.post(`${url}/updatechatbyid`, {"c_id": room, "history" : {"msgList" : msgList}})
+                      .then((res)=>{
+                          if(res.data.success){
+                            socket.emit("join_room", chats.c_id)
+                            setView("true"); 
+                            setSender_id(chats.sender_id); 
+                            setReceiver_id(chats.receiver_id); 
+                            setReceiver_name(chats.receiver_name); 
+                            setRoom( chats.c_id);
+                            setMsgList([])
+                            try{
+                              axios.post(`${url}/getchatbyid`, {"c_id": chats.c_id})
+                            .then((res)=>{
+                                if(res.data.success){
+                                  //setMsgList([])
+                                  setMsgList(res.data.rows.msgList)
+                                }
+                                else{
+                                  setMsgList([])
+                                }
+                            }, (err)=>{console.log(err)})
+
+                            }
+                            catch(err){
+                              setMsgList([])
+                            }
+                          }
+                      }, (err)=>{console.log(err)})
+                    }
                     
+                    console.log(msgHistory)
                     }}>{chats.receiver_name}</span>             
                 </div>
               </div>
