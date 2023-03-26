@@ -1,0 +1,5 @@
+version: "3.3"
+services:
+  Test:
+    build: .
+    ports: -"3000:3000"
