@@ -14,7 +14,7 @@ pipeline {
         }
          stage('Build') {
             steps {
-                sh 'docker build -t kartikeya532001/nodeapp_test:1.0 .'
+                sh 'sudo docker build -t kartikeya532001/nodeapp_test:1.0 .'
             }
         }
 
