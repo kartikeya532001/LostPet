@@ -4,9 +4,15 @@ pipeline {
    
 
     stages {
-        stage('setup') {
+        stage('Commit') {
             steps {
-                echo "Commit."
+                sh 'sudo docker-compose down'
+            }
+        }
+        
+         stage('Deploy') {
+            steps {
+                sh 'sudo docker-compose up -d --force-recreate --no-deps --build test'
             }
         }
 
