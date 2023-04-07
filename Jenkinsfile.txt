@@ -7,9 +7,31 @@ pipeline {
 
 
     stages {
-        stage('Commit') {
+        stage('clean') {
             steps {
                 sh 'sudo docker-compose down'
+            }
+        }
+         stage('Build') {
+            steps {
+                sh 'docker build -t kartikeya532001/nodeapp_test:1.0 .'
+            }
+        }
+
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+        stage('Push') {
+            steps {
+                sh 'docker push kartikeya532001/nodeapp_test:1.0'
+            }
+        }
+         stage('Pull') {
+            steps {
+                sh 'docker pull kartikeya532001/nodeapp_test:1.0'
             }
         }
         
