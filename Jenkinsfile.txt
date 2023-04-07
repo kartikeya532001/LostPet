@@ -12,27 +12,24 @@ pipeline {
                 sh 'sudo docker-compose down'
             }
         }
-         stage('Build') {
+        stage('Build') {
+            steps {
+               sh 'npm build'
+            }
+        }
+         stage('Test') {
+            steps {
+               sh 'npm Test'
+            }
+        }
+        
+        
+         stage('Deploy') {
             steps {
                sh 'sudo docker-compose up -d --force-recreate --no-deps --build test'
             }
         }
 
-        stage('Login') {
-            steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
-
-        stage('Push') {
-            steps {
-                sh 'sudo docker push kartikeya532001/test:1.0'
-            }
-        }
-         stage('Deploy') {
-            steps {
-                sh 'sudo docker pull kartikeya532001/test:1.0'
-            }
-        }
+      
     }
 }
