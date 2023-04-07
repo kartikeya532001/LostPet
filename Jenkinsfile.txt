@@ -6,15 +6,15 @@ pipeline {
     }
 
     stages {
-        stage('Commit') {
+        stage('setup') {
             steps {
-                sh 'sudo docker-compose down'
+                echo "Commit."
             }
         }
 
         stage('Build') {
             steps {
-                sh 'sudo docker build -t kartikeya532001/Frontend:1.0 .'
+                sh 'docker build -t kartikeya532001/Frontend:1.0 .'
             }
         }
 
@@ -26,14 +26,14 @@ pipeline {
 
         stage('Push') {
             steps {
-                sh 'sudo docker push kartikeya532001/Frontend:1.0'
+                sh 'docker push kartikeya532001/Frontend:1.0'
             }
         }
-
-        stage('deployment') {
+         stage('Pull') {
             steps {
-               sh 'sudo docker-compose up -d --force-recreate --no-deps --build test'
+                sh 'docker pull kartikeya532001/Frontend:1.0'
             }
         }
+       
     }
 }
