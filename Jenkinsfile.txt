@@ -8,7 +8,7 @@ pipeline {
         stage ('login') {
         steps {
         withCredentials([string(credentialsId: 'dockerlogin', variable: 'docker')]) {
-            sh 'docker login -u kartikeya532001 -p ${docker}'
+            sh 'sudo docker login -u kartikeya532001 -p ${docker}'
 } }
         }
 
