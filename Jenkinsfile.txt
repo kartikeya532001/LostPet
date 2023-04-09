@@ -27,13 +27,13 @@ pipeline {
 
         stage('Pull') {
             steps {
-                sh 'sudo docker push kartikeya532001/frontend'
+                sh 'sudo docker push frontend'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'sudo docker pull kartikeya532001/frontend'
+                sh 'sudo docker pull frontend'
             }
         }
     }
