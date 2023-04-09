@@ -8,7 +8,7 @@ pipeline {
             }
         }
     
-    tage('Build') {
+    stage('Build') {
             steps {
                sh 'sudo docker build -t kartikeya532001/frontend:1.0'
             }
