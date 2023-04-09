@@ -1,6 +1,6 @@
-version : "3.3"
-services :
-  test :
-    build : .
-    ports : 
+version: "3.3"
+services:
+  frontend:
+    build: .
+    ports:
       - "3000:3000"
