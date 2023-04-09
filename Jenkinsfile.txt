@@ -1,22 +1,14 @@
 pipeline {
     agent any
 
-    stages { stage('Build') {
+    stages { s
+    tage('Build') {
             steps {
                sh 'sudo docker-compose down'
             }
         }
     
-     stage('Build') {
-            steps {
-               sh 'sudo docker-compose up -d --force-recreate --no-deps --build frontend'
-            }
-        }
-        stage('Build') {
-            steps {
-               sh 'sudo docker-compose up -d --force-recreate --no-deps --build frontend'
-            }
-        }
+    
 
         stage('Login') {
             steps {
@@ -25,14 +17,21 @@ pipeline {
                 }
             }
         }
+        
+         stage('Push') {
+            steps {
+               sh 'sudo docker-compose up -d --force-recreate --no-deps --build frontend'
+            }
+        }
+       
 
-        stage('Push') {
+        stage('Pull') {
             steps {
                 sh 'sudo docker push kartikeya532001/frontend'
             }
         }
 
-        stage('Pull') {
+        stage('Deploy') {
             steps {
                 sh 'sudo docker pull kartikeya532001/frontend'
             }
