@@ -7,27 +7,10 @@ pipeline {
 
 
     stages {
-        stage('clean') {
-            steps {
-                sh 'sudo docker-compose down'
-            }
-        }
-        stage('Build') {
-            steps {
-               sh 'npm i'
-            }
-        }
-         stage('Test') {
-            steps {
-               sh 'npm test'
-            }
-        }
-        
-        
-         stage('Deploy') {
-            steps {
-               sh 'sudo docker-compose up -d --force-recreate --no-deps --build test'
-            }
+        stage ('login) {
+        withCredentials([string(credentialsId: 'dockerlogin', variable: 'docker')]) {
+            sh 'docker login -u kartikeya532001 -p ${docker}
+}
         }
 
       
