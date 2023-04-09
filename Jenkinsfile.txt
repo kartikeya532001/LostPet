@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    stages { s
-    tage('Build') {
+    stages { 
+    stage('Build') {
             steps {
                sh 'sudo docker-compose down'
             }
