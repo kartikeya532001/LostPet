@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-const url = process.env.url || 'http://localhost:5000';
+const url = process.env.REACT_APP_url_backend || 'http://localhost:5000';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import io from 'socket.io-client'
 import { useState } from 'react';
 import axios from "axios";
-const url = process.env.url || 'http://localhost:5000';
+const url = process.env.REACT_APP_url_backend || 'http://localhost:5000';
 
 
 // import { ChatContext } from "../context/ChatContext";

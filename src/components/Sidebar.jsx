@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import RecentChat from "./RecentChat";
 
-const url = process.env.url || 'http://localhost:5000';
+const url = process.env.REACT_APP_url_backend || 'http://localhost:5000';
 
 const Sidebar = () => {
 

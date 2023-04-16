@@ -13,7 +13,7 @@ import Chat from "./components/chat";
 import data from "./Data";
 import "./Assets/CSS/UserHome.scss";
 import {socket} from './index'
-const url = process.env.url || 'http://localhost:5000';
+const url = process.env.REACT_APP_url_backend || 'http://localhost:5000';
 
 
 function UserHome() {

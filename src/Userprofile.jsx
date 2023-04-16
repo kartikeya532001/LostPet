@@ -5,7 +5,7 @@ import Nav from './Nav';
 import { useState, useEffect, React } from 'react';
 import axios from "axios";
 
-const url = process.env.url || 'http://localhost:5000';
+const url = process.env.REACT_APP_url_backend || 'http://localhost:5000';
 
 let easeing = [0.6,-0.05,0.01,0.99];
 
