@@ -9,6 +9,7 @@ export const socket = io.connect(process.env.REACT_APP_url_socket);
 
 console.log(process.env.REACT_APP_url_backend);
 console.log(process.env.REACT_APP_url_socket);
+console.log(process.env.url);
 
 ReactDOM.render(
     <>
