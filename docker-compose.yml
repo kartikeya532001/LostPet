@@ -1,6 +1,7 @@
 version: "3.3"
 services:
-  frontend:
-   build: .
+  forntend:
+    build: .
     ports:
       - "3000:3000"
+     
