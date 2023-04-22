@@ -12,4 +12,4 @@ RUN npm rebuild node-sass
 EXPOSE 2000
 
 
-CMD ["npm","start","--port","2000"]
+CMD ["npm","start"]
