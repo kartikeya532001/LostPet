@@ -9,7 +9,7 @@ RUN npm i node-sass
 RUN npm i framer-motion
 RUN npm i react-dotenv
 RUN npm rebuild node-sass
-EXPOSE 2000
+EXPOSE 3000
 
 
 CMD ["npm","start"]
