@@ -39,11 +39,5 @@ pipeline {
                 sh 'sudo docker-compose up -d --force-recreate --no-deps --build frontend'
             }
         }
-        
-          stage('Prod') {
-            steps {
-                sh 'java -jar jenkins-cli.jar -s http://34.222.224.74:8080// -auth Kartikeya:Khanna5301 build "Production"'
-            }
-        }
     }
 }
