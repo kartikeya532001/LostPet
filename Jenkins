@@ -1,0 +1,52 @@
+def ENV = "test"
+def status = "fail"
+pipeline {
+    agent any
+
+    stages {      
+        stage('build') {
+            steps {
+                sh 'java -jar build.jar -s http://52.89.7.185:8080// -auth Kartikeya:Khanna5301 build "Backend" -s'
+                sh 'java -jar build.jar -s http://52.89.7.185:8080// -auth Kartikeya:Khanna5301 build "Frontend" -s'
+            }
+            
+        }
+         stage('test') {
+            steps {
+                sh 'java -jar test.jar -s http://35.84.255.85:8080// -auth Kartikeya:Khanna5301 build "Testing" -s -v'
+                
+                script {
+                    
+                    status = sh (script:'curl --user "Kartikeya:Khanna5301" --silent http://18.237.153.226:8080//job/Testing/lastBuild/api/json | jq -r ".result" ',returnStdout: true)
+                    
+                    echo "${status}"
+                    if (status.toString().contains("SUCCESS")){
+                        echo "Test phase successfull"
+                        ENV = "prod"
+                    
+                    }else{
+                        echo "Test phase failure"
+                    }
+                }
+                
+            }
+            
+        }
+        stage('prod') {
+            
+            steps {
+                script{
+                    if (ENV == "prod"){
+                        sh 'java -jar test.jar -s http://44.235.54.102:8080// -auth Kartikeya:Khanna5301 build "Backend" -s'
+                        sh 'java -jar test.jar -s http://44.235.54.102:8080// -auth Kartikeya:Khanna5301 build "Production" -s'
+                    
+                    }else{
+                        echo "New Code Changes are not being deployed onto Production env"
+                    }
+                }
+               
+            }
+        }
+        
+    }
+}
