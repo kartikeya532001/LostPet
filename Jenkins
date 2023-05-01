@@ -6,8 +6,8 @@ pipeline {
     stages {      
         stage('build') {
             steps {
-                sh 'java -jar build.jar -s http://52.89.7.185:8080// -auth Kartikeya:Khanna5301 build "Backend" -s'
-                sh 'java -jar build.jar -s http://52.89.7.185:8080// -auth Kartikeya:Khanna5301 build "Frontend" -s'
+                sh 'java -jar build.jar -s http://${BUILD}:8080// -auth Kartikeya:Khanna5301 build "Backend" -s -p IP=${BUILD}'
+                sh 'java -jar build.jar -s http://${BUILD}:8080// -auth Kartikeya:Khanna5301 build "Frontend" -s -p IP=${BUILD}'
             }
             
         }
@@ -17,7 +17,7 @@ pipeline {
                 
                 script {
                     
-                    status = sh (script:'curl --user "Kartikeya:Khanna5301" --silent http://18.237.153.226:8080//job/Testing/lastBuild/api/json | jq -r ".result" ',returnStdout: true)
+                    status = sh (script:'curl --user "Kartikeya:Khanna5301" --silent http://35.84.255.85:8080//job/Testing/lastBuild/api/json | jq -r ".result" ',returnStdout: true)
                     
                     echo "${status}"
                     if (status.toString().contains("SUCCESS")){
@@ -37,8 +37,8 @@ pipeline {
             steps {
                 script{
                     if (ENV == "prod"){
-                        sh 'java -jar test.jar -s http://44.235.54.102:8080// -auth Kartikeya:Khanna5301 build "Backend" -s'
-                        sh 'java -jar test.jar -s http://44.235.54.102:8080// -auth Kartikeya:Khanna5301 build "Production" -s'
+                        sh 'java -jar prod.jar -s http://${PROD}:8080// -auth Kartikeya:Khanna5301 build "Backend" -s -p IP=${PROD}'
+                        sh 'java -jar prod.jar -s http://${PROD}:8080// -auth Kartikeya:Khanna5301 build "Frontend" -s -p IP=${PROD}'
                     
                     }else{
                         echo "New Code Changes are not being deployed onto Production env"
