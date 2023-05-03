@@ -2,22 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Pre-Env'){
-            steps{
-                sh '''
-                sudo echo "REACT_APP_url_backend="http://${IP}:5000"\nREACT_APP_url_socket="http://${IP}:5001"" > /var/lib/jenkins/workspace/Frontend/.env
-                '''
-            }
-        }
         stage('Setup') {
             steps {
-                sh 'sudo docker-compose down'
+                sh 'sudo docker rm -f frontend'
+                sh 'sudo docker rmi -f kartikeya/frontend:1.0'
             }
         }
 
-        stage('Build') {
+        stage('Pre-Env') {
             steps {
-                sh 'sudo docker build -t kartikeya532001/frontend:1.0 .'
+                sh '''
+                sudo echo "REACT_APP_url_backend="http://${IP}:5000"\nREACT_APP_url_socket="http://${IP}:5001"" > /var/lib/jenkins/workspace/Frontend/.env
+                '''
             }
         }
 
@@ -29,23 +25,24 @@ pipeline {
             }
         }
 
-        stage('Push') {
-            steps {
-                sh 'sudo docker push kartikeya532001/frontend:1.0'
-            }
-        }
-
         stage('Pull') {
             steps {
                 sh 'sudo docker pull kartikeya532001/frontend:1.0'
             }
         }
 
+        stage('Pre-Env') {
+            steps {
+                sh '''
+                sudo echo "REACT_APP_url_backend="http://${IP}:5000"\nREACT_APP_url_socket="http://${IP}:5001"" > /var/lib/jenkins/workspace/Frontend/.env
+                '''
+            }
+        }
+
         stage('Deploy') {
             steps {
-                sh 'sudo docker-compose up -d --force-recreate --no-deps --build frontend'
+                sh 'sudo docker run -d --name frontend -p 3000:3000 kartikeya532001/frontend:1.0'
             }
         }
     }
 }
-
