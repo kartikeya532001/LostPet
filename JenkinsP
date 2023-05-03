@@ -9,13 +9,7 @@ pipeline {
             }
         }
 
-        stage('Pre-Env') {
-            steps {
-                sh '''
-                sudo echo "REACT_APP_url_backend="http://${IP}:5000"\nREACT_APP_url_socket="http://${IP}:5001"" > /var/lib/jenkins/workspace/Frontend/.env
-                '''
-            }
-        }
+     
 
         stage('Login') {
             steps {
