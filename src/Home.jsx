@@ -218,7 +218,7 @@ function Home() {
                </motion.span>
             </motion.h2>
             <motion.p variants={fadeInUp}>
-            Happiness warm puppy. <br /> There are always paw prints on our hearts.<br />
+            Happiness is a warm puppy. <br /> There are always paw prints on our hearts.<br />
             </motion.p>
             <motion.div className='btn_group' variants={stagger}>
               <motion.div className='btn btn_primary' variants={btnGroup} whileHover={{scale:1.05}} whileTap={{scale:0.95}}> <Link to ='/signup' style={{color:'white',textDecoration: 'none'}}>Register</Link>
