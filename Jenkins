@@ -13,7 +13,7 @@ pipeline {
         }
          stage('test') {
             steps {
-                sh 'java -jar test.jar -s http://35.84.255.85:8080// -auth Kartikeya:Khanna5301 build "Testing" -s -v'
+                sh 'java -jar test.jar -s http://52.12.195.124:8080// -auth Kartikeya:Khanna5301 build "Testing" -s -v'
                 
                 script {
                     
