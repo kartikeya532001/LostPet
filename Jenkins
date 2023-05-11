@@ -17,7 +17,7 @@ pipeline {
                 
                 script {
                     
-                    status = sh (script:'curl --user "Kartikeya:Khanna5301" --silent http://35.84.255.85:8080//job/Testing/lastBuild/api/json | jq -r ".result" ',returnStdout: true)
+                    status = sh (script:'curl --user "Kartikeya:Khanna5301" --silent http://52.12.195.124:8080//job/Testing/lastBuild/api/json | jq -r ".result" ',returnStdout: true)
                     
                     echo "${status}"
                     if (status.toString().contains("SUCCESS")){
